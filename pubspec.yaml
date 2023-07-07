@@ -19,6 +19,10 @@ dependencies:
   # for nav bar
   google_nav_bar: ^5.0.6
 
+  # for mvc pattern
+  mvc_pattern: 8.12.0
+  get: 4.6.5
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

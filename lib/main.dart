@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'components/bottom_navigation_bar.dart';
 import './style.dart';
 import './pages/timer.dart';
-import './pages/tab2.dart';
+import './pages/login.dart';
 import './pages/tab3.dart';
 
 void main() {
@@ -40,7 +40,7 @@ class _MainAppState extends State<MainApp> with SingleTickerProviderStateMixin {
           controller: _tabController,
           children: [
             Timer(),
-            Tab2(),
+            Login(),
             Tab3(),
           ]
         ),
