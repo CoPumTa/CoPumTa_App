@@ -7,7 +7,7 @@ class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
 
   @override
-  _LoginState createState () => _LoginState();
+  _LoginState createState() => _LoginState();
 }
 
 class _LoginState extends StateMVC<Login> {
@@ -33,7 +33,12 @@ class _LoginState extends StateMVC<Login> {
                   labelText: "id",
                 ),
                 onChanged: (id) => loginController.setId(id),
-              )
+              ),
+              ElevatedButton(
+                  onPressed: () {
+                    loginController.getData();
+                  },
+                  child: Text("Get Data")),
             ],
           ),
         ),
