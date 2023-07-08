@@ -5,8 +5,9 @@ import 'package:flutter/material.dart';
 class LoginTextInput extends StatelessWidget {
   final String hintText;
   final IconData prefixIcon;
+  final TextEditingController controller;
   const LoginTextInput(
-      {super.key, required this.hintText, required this.prefixIcon});
+      {super.key, required this.hintText, required this.prefixIcon, required this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -15,6 +16,7 @@ class LoginTextInput extends StatelessWidget {
         padding: EdgeInsets.fromLTRB(8.0, 3.0, 8.0, 3.0),
         decoration: kDefaultRoundedBorderDecoration,
         child: (TextFormField(
+          controller: controller,
           autofocus: true,
           decoration: InputDecoration(
               border: InputBorder.none,

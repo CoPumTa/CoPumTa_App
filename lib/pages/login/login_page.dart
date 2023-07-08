@@ -4,9 +4,21 @@ import 'package:client/widgets/login_social_button.dart';
 import 'package:client/widgets/login_text_input.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:client/pages/login/login_page_controller.dart';
+import 'package:mvc_pattern/mvc_pattern.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
+  @override
+  _LoginPageState createState() => _LoginPageState();
+}
+
+class _LoginPageState extends StateMVC<LoginPage> {
   final double gap = 8.0;
+  late LoginPageController loginPageController;
+
+  _LoginPageState() : super(LoginPageController()) {
+    loginPageController = controller as LoginPageController;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,13 +31,27 @@ class LoginPage extends StatelessWidget {
               Text("Hey there,", style: TextStyles.Secondary),
               Text("Welcome Back", style: TextStyles.Primary),
               Gap(height: gap * 2),
-              LoginTextInput(hintText: 'Email', prefixIcon: Icons.mail),
+              LoginTextInput(
+                hintText: 'Email',
+                prefixIcon: Icons.mail,
+                controller: loginPageController.idController,
+              ),
               Gap(height: gap),
-              LoginTextInput(hintText: 'Password', prefixIcon: Icons.lock),
+              LoginTextInput(
+                hintText: 'Password',
+                prefixIcon: Icons.lock,
+                controller: loginPageController.passwordController,
+              ),
               Gap(height: gap),
               Text("Forgot your password?", style: TextStyles.Comment),
               Gap(height: gap * 2),
-              CupertinoButton.filled(child: Text('Login'), onPressed: () {}),
+              CupertinoButton.filled(
+                  child: Text('Login'),
+                  onPressed: () {
+                    loginPageController.onConfirmLogin(
+                        loginPageController.idController.text,
+                        loginPageController.passwordController.text);
+                  }),
               Gap(height: gap * 2),
               Row(
                 mainAxisSize: MainAxisSize.max,

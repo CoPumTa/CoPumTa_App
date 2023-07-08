@@ -1,17 +1,18 @@
-import 'dart:convert';
-import 'dart:developer' as dev;
-
+import 'package:flutter/cupertino.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:client/models/login_model.dart';
 
-class LoginController extends ControllerMVC {
+class LoginPageController extends ControllerMVC {
   final LoginModel _login;
-  static LoginController? _this;
+  static LoginPageController? _this;
 
-  factory LoginController([StateMVC? state]) =>
-      _this ??= LoginController._(state);
+  TextEditingController idController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
 
-  LoginController._(StateMVC? state)
+  factory LoginPageController([StateMVC? state]) =>
+      _this ??= LoginPageController._(state);
+
+  LoginPageController._(StateMVC? state)
       : _login = LoginModel(),
         super(state);
 
@@ -20,13 +21,11 @@ class LoginController extends ControllerMVC {
 
   void update() => setState(() {});
 
-  void setId(String id) {
+  void onConfirmLogin(String id, String password) {
     _login.id = id;
-    update();
-  }
-
-  void setPassword(String password) {
+    debugPrint("debugging id: ${_login.id}");
     _login.password = password;
+    debugPrint("debugging password: ${_login.password}");
     update();
   }
 }

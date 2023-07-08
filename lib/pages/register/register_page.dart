@@ -33,11 +33,23 @@ class _RegisterPageState extends StateMVC<RegisterPage> {
               Text("Hey there,", style: TextStyles.Secondary),
               Text("Create an account", style: TextStyles.Primary),
               Gap(height: gap * 2),
-              LoginTextInput(hintText: 'Name', prefixIcon: Icons.person),
+              LoginTextInput(
+                hintText: 'Name',
+                prefixIcon: Icons.person,
+                controller: registerPageController.nameController,
+              ),
               Gap(height: gap),
-              LoginTextInput(hintText: 'Email', prefixIcon: Icons.mail),
+              LoginTextInput(
+                hintText: 'Email',
+                prefixIcon: Icons.mail,
+                controller: registerPageController.idController,
+              ),
               Gap(height: gap),
-              LoginTextInput(hintText: 'Password', prefixIcon: Icons.lock),
+              LoginTextInput(
+                hintText: 'Password',
+                prefixIcon: Icons.lock,
+                controller: registerPageController.passwordController,
+              ),
               Gap(height: gap),
               CheckboxWithComment(
                 comment:
@@ -45,7 +57,14 @@ class _RegisterPageState extends StateMVC<RegisterPage> {
                 checkboxController: registerPageController,
               ),
               Gap(height: gap * 2),
-              CupertinoButton.filled(child: Text('Register'), onPressed: () {}),
+              CupertinoButton.filled(
+                  child: Text('Register'),
+                  onPressed: () {
+                    registerPageController.onConfirmRegister(
+                        registerPageController.nameController.text,
+                        registerPageController.idController.text,
+                        registerPageController.passwordController.text);
+                  }),
               Gap(height: gap * 2),
               Row(
                 mainAxisSize: MainAxisSize.max,
