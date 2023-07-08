@@ -1,4 +1,4 @@
-import 'package:client/models/register_model.dart';
+import 'package:client/data/models/register_model.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:flutter/cupertino.dart';
 
