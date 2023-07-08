@@ -1,3 +1,4 @@
+import 'package:client/pages/login/login_page.dart';
 import 'package:client/pages/register/register_page_controller.dart';
 import 'package:client/style.dart';
 import 'package:client/widgets/checkbox_with_comment.dart';
@@ -106,14 +107,22 @@ class _RegisterPageState extends StateMVC<RegisterPage> {
                             imageSource: 'assets/images/logo_kakao.png'),
                       ]),
                   Gap(height: gap * 2),
-                  const Row(
+                  Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Text("Already have an account?",
                             style: TextStyles.Main),
-                        SizedBox(width: 4.0),
-                        Text("Login", style: TextStyles.MainAccent),
+                        TextButton(
+                            style: TextButton.styleFrom(
+                                textStyle: TextStyles.MainAccent),
+                            onPressed: () {
+                              Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => LoginPage()));
+                            },
+                            child: Text("Login")),
                       ])
                 ])));
   }

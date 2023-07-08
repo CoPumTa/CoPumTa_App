@@ -1,3 +1,4 @@
+import 'package:client/pages/register/register_page.dart';
 import 'package:client/style.dart';
 import 'package:client/widgets/gap.dart';
 import 'package:client/widgets/login_social_button.dart';
@@ -94,14 +95,22 @@ class _LoginPageState extends StateMVC<LoginPage> {
                             imageSource: 'assets/images/logo_kakao.png'),
                       ]),
                   Gap(height: gap * 2),
-                  const Row(
+                  Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Text("Don\'t have an account yet?",
                             style: TextStyles.Main),
-                        SizedBox(width: 4.0),
-                        Text("Register", style: TextStyles.MainAccent),
+                        TextButton(
+                            style: TextButton.styleFrom(
+                                textStyle: TextStyles.MainAccent),
+                            onPressed: () {
+                              Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => RegisterPage()));
+                            },
+                            child: Text("Register")),
                       ])
                 ])));
   }
