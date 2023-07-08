@@ -90,9 +90,9 @@ class _RegisterPageState extends StateMVC<RegisterPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Text("Already have an account?", style: TextStyles.Hint),
+                    Text("Already have an account?", style: TextStyles.Main),
                     SizedBox(width: 4.0),
-                    Text("Login", style: TextStyles.Main),
+                    Text("Login", style: TextStyles.MainAccent),
                   ])
             ]));
   }
