@@ -1,3 +1,4 @@
+import 'package:client/pages/login/login_page.dart';
 import 'package:flutter/material.dart';
 
 import 'components/bottom_navigation_bar.dart';
@@ -34,18 +35,17 @@ class _MainAppState extends State<MainApp> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        body: TabBarView(
-          physics: const NeverScrollableScrollPhysics(),
-          controller: _tabController,
-          children: [
-            Timer(),
-            Tab2(),
-            Tab3(),
-          ]
-        ),
-        bottomNavigationBar: NavBar(_tabController),
-      )
-    );
+        theme: ThemeData(fontFamily: 'Poppins'),
+        home: Scaffold(
+          body: TabBarView(
+              physics: const NeverScrollableScrollPhysics(),
+              controller: _tabController,
+              children: [
+                Timer(),
+                LoginPage(),
+                Tab3(),
+              ]),
+          bottomNavigationBar: NavBar(_tabController),
+        ));
   }
 }
