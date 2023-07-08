@@ -1,4 +1,5 @@
 import 'package:client/pages/login/login_page.dart';
+import 'package:client/pages/register/register_page.dart';
 import 'package:flutter/material.dart';
 
 import 'components/bottom_navigation_bar.dart';
@@ -43,7 +44,7 @@ class _MainAppState extends State<MainApp> with SingleTickerProviderStateMixin {
               children: [
                 Timer(),
                 LoginPage(),
-                Tab3(),
+                RegisterPage(),
               ]),
           bottomNavigationBar: NavBar(_tabController),
         ));

@@ -1,12 +1,26 @@
+import 'package:client/pages/register/register_page_controller.dart';
 import 'package:client/style.dart';
+import 'package:client/widgets/checkbox_with_comment.dart';
 import 'package:client/widgets/gap.dart';
 import 'package:client/widgets/login_social_button.dart';
 import 'package:client/widgets/login_text_input.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mvc_pattern/mvc_pattern.dart';
 
-class LoginPage extends StatelessWidget {
+class RegisterPage extends StatefulWidget {
+  @override
+  _RegisterPageState createState() => _RegisterPageState();
+}
+
+class _RegisterPageState extends StateMVC<RegisterPage> {
   final double gap = 8.0;
+
+  late RegisterPageController registerPageController;
+
+  _RegisterPageState() : super(RegisterPageController()) {
+    registerPageController = controller as RegisterPageController;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,15 +31,21 @@ class LoginPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text("Hey there,", style: TextStyles.Secondary),
-              Text("Welcome Back", style: TextStyles.Primary),
+              Text("Create an account", style: TextStyles.Primary),
               Gap(height: gap * 2),
+              LoginTextInput(hintText: 'Name', prefixIcon: Icons.person),
+              Gap(height: gap),
               LoginTextInput(hintText: 'Email', prefixIcon: Icons.mail),
               Gap(height: gap),
               LoginTextInput(hintText: 'Password', prefixIcon: Icons.lock),
               Gap(height: gap),
-              Text("Forgot your password?", style: TextStyles.Comment),
+              CheckboxWithComment(
+                comment:
+                    "By continuing you accept our Privacy Policy and Term of Use.",
+                checkboxController: registerPageController,
+              ),
               Gap(height: gap * 2),
-              CupertinoButton.filled(child: Text('Login'), onPressed: () {}),
+              CupertinoButton.filled(child: Text('Register'), onPressed: () {}),
               Gap(height: gap * 2),
               Row(
                 mainAxisSize: MainAxisSize.max,
@@ -70,9 +90,9 @@ class LoginPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Text("Don\'t have an account yet?", style: TextStyles.Main),
+                    Text("Already have an account?", style: TextStyles.Hint),
                     SizedBox(width: 4.0),
-                    Text("Register", style: TextStyles.MainAccent),
+                    Text("Login", style: TextStyles.Main),
                   ])
             ]));
   }

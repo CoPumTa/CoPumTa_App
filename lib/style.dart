@@ -38,6 +38,10 @@ class TextStyles {
       TextStyle(fontSize: 16, color: mainColor, fontWeight: FontWeight.w500);
   static const Main =
       TextStyle(fontSize: 14, color: mainColor, fontWeight: FontWeight.w400);
+  static const MainAccent =
+      TextStyle(fontSize: 14, color: blackColor, fontWeight: FontWeight.w400);
   static const Hint =
       TextStyle(fontSize: 14, color: subColor, fontWeight: FontWeight.w400);
+  static const Comment =
+      TextStyle(fontSize: 12, color: subColor, fontWeight: FontWeight.w400);
 }

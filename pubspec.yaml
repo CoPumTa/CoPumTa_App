@@ -20,6 +20,9 @@ dependencies:
   google_nav_bar: ^5.0.6
   cupertino_icons: ^1.0.5
 
+  # for mvc pattern
+  mvc_pattern: ^8.12.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
