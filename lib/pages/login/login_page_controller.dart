@@ -1,3 +1,4 @@
+import 'package:client/data/models/social_login_model.dart';
 import 'package:client/data/providers/auth_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
@@ -9,6 +10,7 @@ import 'package:provider/provider.dart';
 class LoginPageController extends ControllerMVC {
   final LoginModel _login;
   static LoginPageController? _this;
+  final SocialLoginModel _socialLoginModel;
 
   TextEditingController idController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -18,6 +20,7 @@ class LoginPageController extends ControllerMVC {
 
   LoginPageController._(StateMVC? state)
       : _login = LoginModel(),
+        _socialLoginModel = SocialLoginModel(),
         super(state);
 
   get id => _login.id;
@@ -25,9 +28,10 @@ class LoginPageController extends ControllerMVC {
 
   void update() => setState(() {});
 
-  Future<void> onLoginGoogle() async {}
-  Future<void> onLoginKakao() async {
-    // TODO: SocialLoginModel을 singleton으로 선언하고 해당 instance의 login을 호출할 것
+  void onLoginGoogle() {}
+  void onLoginKakao(BuildContext context) {
+    _socialLoginModel.login(context);
+    update();
   }
 
   void onConfirmLogin(String id, String password, BuildContext context) {

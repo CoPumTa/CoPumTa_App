@@ -90,12 +90,12 @@ class _LoginPageState extends StateMVC<LoginPage> {
                       children: [
                         LoginSocialButton(
                           imageSource: 'assets/images/logo_google.png',
-                          onPressed: loginPageController.onLoginGoogle,
+                          onPressedFunction: loginPageController.onLoginGoogle,
                         ),
                         SizedBox(width: 16.0),
                         LoginSocialButton(
                           imageSource: 'assets/images/logo_kakao.png',
-                          onPressed: loginPageController.onLoginKakao,
+                          onPressedFunction: loginPageController.onLoginKakao,
                         ),
                       ]),
                   Gap(height: gap * 2),

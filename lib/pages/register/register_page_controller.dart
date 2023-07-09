@@ -1,9 +1,11 @@
 import 'package:client/data/models/register_model.dart';
+import 'package:client/data/models/social_login_model.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:flutter/cupertino.dart';
 
 class RegisterPageController extends ControllerMVC {
   final RegisterModel _register;
+  final SocialLoginModel _socialLoginModel;
   static RegisterPageController? _this;
 
   TextEditingController nameController = TextEditingController();
@@ -15,6 +17,7 @@ class RegisterPageController extends ControllerMVC {
 
   RegisterPageController._(StateMVC? state)
       : _register = RegisterModel(),
+        _socialLoginModel = SocialLoginModel(),
         super(state);
 
   get name => _register.name;
@@ -30,7 +33,10 @@ class RegisterPageController extends ControllerMVC {
   }
 
   void onRegisterGoogle() {}
-  void onRegisterKakao() {}
+  void onRegisterKakao(BuildContext context) {
+    _socialLoginModel.login(context);
+    update();
+  }
 
   void onConfirmRegister(String name, String id, String password) {
     _register.name = name;
