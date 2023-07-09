@@ -104,12 +104,14 @@ class _RegisterPageState extends StateMVC<RegisterPage> {
                       children: [
                         LoginSocialButton(
                           imageSource: 'assets/images/logo_google.png',
-                          onPressed: registerPageController.onRegisterGoogle,
+                          onPressedFunction:
+                              registerPageController.onRegisterGoogle,
                         ),
                         SizedBox(width: 16.0),
                         LoginSocialButton(
                           imageSource: 'assets/images/logo_kakao.png',
-                          onPressed: registerPageController.onRegisterKakao,
+                          onPressedFunction:
+                              registerPageController.onRegisterKakao,
                         ),
                       ]),
                   Gap(height: gap * 2),

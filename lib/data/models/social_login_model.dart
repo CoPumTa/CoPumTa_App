@@ -1,10 +1,13 @@
+import 'package:client/data/providers/auth_provider.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
+import 'package:provider/provider.dart';
 
 class SocialLoginModel {
   User? user;
 
-  Future login() async {
+  Future login(BuildContext context) async {
     if (await isKakaoTalkInstalled()) {
       try {
         await UserApi.instance.loginWithKakaoTalk();
@@ -14,6 +17,7 @@ class SocialLoginModel {
             '\n회원번호: ${user.id}'
             '\n닉네임: ${user.kakaoAccount?.profile?.nickname}'
             '\n이메일: ${user.kakaoAccount?.email}');
+        Provider.of<AuthProvider>(context, listen: false).login();
       } catch (error) {
         print('카카오톡으로 로그인 실패 $error');
 
@@ -26,6 +30,7 @@ class SocialLoginModel {
         try {
           await UserApi.instance.loginWithKakaoAccount();
           print('카카오계정으로 로그인 성공');
+          Provider.of<AuthProvider>(context, listen: false).login();
         } catch (error) {
           print('카카오계정으로 로그인 실패 $error');
         }
@@ -34,6 +39,7 @@ class SocialLoginModel {
       try {
         await UserApi.instance.loginWithKakaoAccount();
         print('카카오계정으로 로그인 성공');
+        Provider.of<AuthProvider>(context, listen: false).login();
       } catch (error) {
         print('카카오계정으로 로그인 실패 $error');
       }
