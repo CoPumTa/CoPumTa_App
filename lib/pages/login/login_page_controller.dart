@@ -18,18 +18,17 @@ class LoginPageController extends ControllerMVC {
       : _login = LoginModel(),
         super(state);
 
-  get id => _login.id;
+  get email => _login.email;
   get password => _login.password;
 
   void update() => setState(() {});
 
-  void onConfirmLogin(String id, String password, BuildContext context) {
-    _login.id = id;
-    debugPrint("debugging id: ${_login.id}");
+  void onConfirmLogin(String email, String password, BuildContext context) {
+    _login.email = email;
+    debugPrint("debugging email: ${_login.email}");
     _login.password = password;
     debugPrint("debugging password: ${_login.password}");
 
-    // TODO: 로그인 정보가 유효한지 확인
-    Provider.of<AuthProvider>(context, listen: false).login();
+    _login.login(context);
   }
 }
