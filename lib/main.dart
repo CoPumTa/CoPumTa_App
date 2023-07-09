@@ -1,13 +1,13 @@
+import 'package:client/pages/login/login_page.dart';
+import 'package:client/pages/main/main_page.dart';
 import 'package:flutter/material.dart';
-
-import 'components/bottom_navigation_bar.dart';
-import './style.dart';
-import './pages/timer.dart';
-import './pages/tab2.dart';
-import './pages/tab3.dart';
+import 'package:provider/provider.dart';
+import 'data/providers/auth_provider.dart';
 
 void main() {
-  runApp(const MainApp());
+  runApp(ChangeNotifierProvider<AuthProvider>(
+      create: (_) => AuthProvider(), // 인증 관련 상태를 제공하는 Auth 클래스를 생성합니다.
+      child: MainApp()));
 }
 
 class MainApp extends StatefulWidget {
@@ -17,35 +17,17 @@ class MainApp extends StatefulWidget {
   State<MainApp> createState() => _MainAppState();
 }
 
-class _MainAppState extends State<MainApp> with SingleTickerProviderStateMixin {
-  List<Tab> tabs = const [
-    Tab(icon: Icon(Icons.phone)),
-    Tab(icon: Icon(Icons.perm_media)),
-    Tab(icon: Icon(Icons.contact_page)),
-  ];
-  late TabController _tabController;
-
-  @override
-  void initState() {
-    _tabController = TabController(vsync: this, length: tabs.length);
-    super.initState();
-  }
-
+class _MainAppState extends State<MainApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        body: TabBarView(
-          physics: const NeverScrollableScrollPhysics(),
-          controller: _tabController,
-          children: [
-            Timer(),
-            Tab2(),
-            Tab3(),
-          ]
-        ),
-        bottomNavigationBar: NavBar(_tabController),
-      )
-    );
+        theme: ThemeData(fontFamily: 'Poppins'),
+        home: Consumer<AuthProvider>(builder: (context, auth, _) {
+          if (auth.isLoggedIn) {
+            return MainPage();
+          } else {
+            return LoginPage();
+          }
+        }));
   }
 }

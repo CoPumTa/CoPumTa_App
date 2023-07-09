@@ -1,23 +1,29 @@
 name: client
 description: A new Flutter project.
-publish_to: 'none'
+publish_to: "none"
 version: 0.1.0
 
 environment:
-  sdk: '>=3.0.1 <4.0.0'
+  sdk: ">=3.0.1 <4.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
-  
+
   # to process Datetime
-  intl: ^0.18.1 
+  intl: ^0.18.1
 
   # toast for general purpose
   fluttertoast: ^8.0.8
 
   # for nav bar
   google_nav_bar: ^5.0.6
+  cupertino_icons: ^1.0.5
+
+  # for mvc pattern
+  mvc_pattern: ^8.12.0
+  flutter_native_splash: ^2.3.1
+  provider: ^6.0.5
 
 dev_dependencies:
   flutter_test:
@@ -26,3 +32,25 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/images/
+    - assets/fonts/
+  fonts:
+    - family: Poppins
+      fonts:
+        - asset: assets/fonts/Poppins/Poppins-ExtraLight.ttf
+          weight: 200
+        - asset: assets/fonts/Poppins/Poppins-Light.ttf
+          weight: 300
+        - asset: assets/fonts/Poppins/Poppins-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Poppins/Poppins-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Poppins/Poppins-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Poppins/Poppins-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Poppins/Poppins-ExtraBold.ttf
+          weight: 800
+        - asset: assets/fonts/Poppins/Poppins-Black.ttf
+          weight: 900
