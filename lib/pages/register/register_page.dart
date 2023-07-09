@@ -96,15 +96,19 @@ class _RegisterPageState extends StateMVC<RegisterPage> {
                     ],
                   ),
                   Gap(height: gap * 2),
-                  const Row(
+                  Row(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         LoginSocialButton(
-                            imageSource: 'assets/images/logo_google.png'),
+                          imageSource: 'assets/images/logo_google.png',
+                          onPressed: registerPageController.onRegisterGoogle,
+                        ),
                         SizedBox(width: 16.0),
                         LoginSocialButton(
-                            imageSource: 'assets/images/logo_kakao.png'),
+                          imageSource: 'assets/images/logo_kakao.png',
+                          onPressed: registerPageController.onRegisterKakao,
+                        ),
                       ]),
                   Gap(height: gap * 2),
                   Row(
