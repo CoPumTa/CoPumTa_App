@@ -30,5 +30,6 @@ class LoginPageController extends ControllerMVC {
     debugPrint("debugging password: ${_login.password}");
 
     _login.login(context);
+    update();
   }
 }

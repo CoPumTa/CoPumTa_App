@@ -45,6 +45,7 @@ class RegisterPageController extends ControllerMVC {
       _register.signUp();
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) => LoginPage()));
+      update();
     } else {
       Fluttertoast.showToast(msg: "개인정보 제공 동의가 거부되어 있습니다.");
     }
