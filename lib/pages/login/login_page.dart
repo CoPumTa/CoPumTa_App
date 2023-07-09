@@ -85,15 +85,19 @@ class _LoginPageState extends StateMVC<LoginPage> {
                     ],
                   ),
                   Gap(height: gap * 2),
-                  const Row(
+                  Row(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         LoginSocialButton(
-                            imageSource: 'assets/images/logo_google.png'),
+                          imageSource: 'assets/images/logo_google.png',
+                          onPressed: loginPageController.onLoginGoogle,
+                        ),
                         SizedBox(width: 16.0),
                         LoginSocialButton(
-                            imageSource: 'assets/images/logo_kakao.png'),
+                          imageSource: 'assets/images/logo_kakao.png',
+                          onPressed: loginPageController.onLoginKakao,
+                        ),
                       ]),
                   Gap(height: gap * 2),
                   Row(

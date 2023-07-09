@@ -32,6 +32,9 @@ class RegisterPageController extends ControllerMVC {
     update();
   }
 
+  void onRegisterGoogle() {}
+  void onRegisterKakao() {}
+
   void onConfirmRegister(
       String name, String email, String password, BuildContext context) {
     _register.name = name;
