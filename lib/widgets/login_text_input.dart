@@ -1,13 +1,18 @@
 import 'package:client/style.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class LoginTextInput extends StatelessWidget {
   final String hintText;
   final IconData prefixIcon;
   final TextEditingController controller;
-  const LoginTextInput(
-      {super.key, required this.hintText, required this.prefixIcon, required this.controller});
+  bool? hideInput = false;
+
+  LoginTextInput(
+      {super.key,
+      required this.hintText,
+      required this.prefixIcon,
+      required this.controller,
+      this.hideInput});
 
   @override
   Widget build(BuildContext context) {
@@ -16,6 +21,7 @@ class LoginTextInput extends StatelessWidget {
         padding: EdgeInsets.fromLTRB(8.0, 3.0, 8.0, 3.0),
         decoration: kDefaultRoundedBorderDecoration,
         child: (TextFormField(
+          obscureText: hideInput ?? false,
           controller: controller,
           autofocus: true,
           decoration: InputDecoration(

@@ -51,6 +51,7 @@ class _RegisterPageState extends StateMVC<RegisterPage> {
                     hintText: 'Password',
                     prefixIcon: Icons.lock,
                     controller: registerPageController.passwordController,
+                    hideInput: true,
                   ),
                   Gap(height: gap),
                   CheckboxWithComment(
@@ -65,7 +66,8 @@ class _RegisterPageState extends StateMVC<RegisterPage> {
                         registerPageController.onConfirmRegister(
                             registerPageController.nameController.text,
                             registerPageController.idController.text,
-                            registerPageController.passwordController.text);
+                            registerPageController.passwordController.text,
+                            context);
                       }),
                   Gap(height: gap * 2),
                   Row(

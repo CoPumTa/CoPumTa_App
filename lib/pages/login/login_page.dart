@@ -43,6 +43,7 @@ class _LoginPageState extends StateMVC<LoginPage> {
                     hintText: 'Password',
                     prefixIcon: Icons.lock,
                     controller: loginPageController.passwordController,
+                    hideInput: true,
                   ),
                   Gap(height: gap),
                   Text("Forgot your password?", style: TextStyles.Comment),
