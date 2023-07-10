@@ -9,28 +9,29 @@ class LoginModel {
   String _email = "";
   String _password = "";
 
-  String get email => _email;
-  String get password => _password;
+  static String cookie = "";
 
   set email(String id) => (_email = id);
+  String get email => _email;
+
+  String get password => _password;
   set password(String password) => (_password = password);
 
   void login(context) async {
-    final request = Uri.parse(BASE_URL + "auth/login/");
+    final request = Uri.parse("${BASE_URL}auth/login/");
 
     try {
       final response = await http.post(request,
           headers: {"Content-Type": "application/json"},
           body: json.encode({"email": email, "password": password}));
-      if (response.statusCode == 401) {
+      if (response.statusCode == 401 || response.headers["set-cookie"] == null) {
         debugPrint("login 정보 불일치");
       } else {
-        var data = jsonDecode(response.body);
-        debugPrint(data);
+        LoginModel.cookie = response.headers["set-cookie"]!;
         Provider.of<AuthProvider>(context, listen: false).login();
       }
     } catch (error) {
-      debugPrint(error.toString());
+      debugPrint("login 에러: $error");
     }
   }
 
