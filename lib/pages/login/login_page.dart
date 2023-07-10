@@ -24,6 +24,7 @@ class _LoginPageState extends StateMVC<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        resizeToAvoidBottomInset: false,
         body: Padding(
             padding: EdgeInsetsDirectional.fromSTEB(30, 0, 30, 0),
             child: Column(

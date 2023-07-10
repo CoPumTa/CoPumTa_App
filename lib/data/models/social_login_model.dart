@@ -68,7 +68,8 @@ class SocialLoginModel {
           headers: {"Content-Type": "application/json"},
           body: json
               .encode({"email": email, "snsId": snsId, "provider": provider}));
-      if (response.statusCode == 401 || response.headers["set-cookie"] == null) {
+      if (response.statusCode == 401 ||
+          response.headers["set-cookie"] == null) {
         debugPrint("login 정보 불일치");
       } else {
         LoginModel.cookie = response.headers["set-cookie"]!;
