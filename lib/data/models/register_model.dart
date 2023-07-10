@@ -30,8 +30,34 @@ class RegisterModel {
       if (response.statusCode == 401) {
         debugPrint("회원가입 에러");
       } else {
+        // 정상적인 회원 등록
         var data = jsonDecode(response.body);
         debugPrint(data);
+      }
+    } catch (error) {
+      debugPrint(error.toString());
+    }
+  }
+
+  void signUpWithSnsId(
+      String? userName, String? email, String snsId, String? provider) async {
+    final request = Uri.parse(BASE_URL + "auth/signUp/");
+
+    try {
+      final response = await http.post(request,
+          headers: {"Content-Type": "application/json"},
+          body: json.encode({
+            "userName": userName,
+            "email": email,
+            "snsId": snsId,
+            "provider": provider
+          }));
+      if (response.statusCode == 401) {
+        debugPrint("response.statusCode: " + response.statusCode.toString());
+        debugPrint("회원가입 에러");
+      } else {
+        // 정상적인 회원 등록
+
       }
     } catch (error) {
       debugPrint(error.toString());

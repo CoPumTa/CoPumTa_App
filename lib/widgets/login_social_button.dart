@@ -1,17 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:client/style.dart';
 
-class LoginSocialButton extends StatefulWidget {
+class LoginSocialButton extends StatelessWidget {
   final String imageSource;
   Function onPressedFunction;
   LoginSocialButton(
       {super.key, required this.imageSource, required this.onPressedFunction});
 
-  @override
-  State<LoginSocialButton> createState() => _LoginSocialButtonState();
-}
-
-class _LoginSocialButtonState extends State<LoginSocialButton> {
   @override
   Widget build(BuildContext context) {
     return OutlinedButton(
@@ -20,12 +15,12 @@ class _LoginSocialButtonState extends State<LoginSocialButton> {
         fixedSize: const Size(100, 100),
       ),
       onPressed: () {
-        widget.onPressedFunction(context);
+        onPressedFunction(context);
       },
       child: Align(
         alignment: Alignment.center,
         child: Image.asset(
-          widget.imageSource,
+          imageSource,
           width: 24,
           fit: BoxFit.cover,
         ),

@@ -1,8 +1,11 @@
 import 'package:client/data/models/social_login_model.dart';
 import 'package:client/data/providers/auth_provider.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:client/data/models/login_model.dart';
+import 'package:provider/provider.dart';
 
 class LoginPageController extends ControllerMVC {
   final LoginModel _login;
@@ -26,8 +29,15 @@ class LoginPageController extends ControllerMVC {
   void update() => setState(() {});
 
   void onLoginGoogle() {}
-  void onLoginKakao(BuildContext context) {
-    _socialLoginModel.login(context);
+  void onLoginKakao(BuildContext context) async {
+    User? snsUser = await _socialLoginModel.socialLogin();
+    if (snsUser != null) {
+      _socialLoginModel.login(
+          context, snsUser.kakaoAccount?.email, snsUser.id.toString(), "kakao");
+    } else {
+      Fluttertoast.showToast(msg: "카카오 소셜 로그인에 실패했습니다.");
+    }
+
     update();
   }
 
