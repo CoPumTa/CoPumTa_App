@@ -5,6 +5,7 @@ import 'package:client/widgets/gap.dart';
 import 'package:client/widgets/widgetWithTopLeftHeading.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -59,7 +60,8 @@ class _HomePageState extends State<HomePage> {
             padding: const EdgeInsets.fromLTRB(16.0, 12.0, 16.0, 12.0),
             child: WidgetWithTopLeftHeading(
                 heading: "My Flow of Programming",
-                widget: Image.network("https://ghchart.rshah.org/coitloz88"))),
+                widget:
+                    SvgPicture.network("https://ghchart.rshah.org/coitloz88"))),
       ),
     ]);
   }
