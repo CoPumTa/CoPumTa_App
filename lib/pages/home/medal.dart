@@ -21,7 +21,7 @@ class Medal extends StatelessWidget {
         width: 54,
         fit: BoxFit.cover,
       ),
-      const Gap(height: 8),
+      const SizedBox(height: 8),
       Text(userName, style: TextStyles.Main),
       Text(flowTime, style: TextStyles.Hint),
     ]);

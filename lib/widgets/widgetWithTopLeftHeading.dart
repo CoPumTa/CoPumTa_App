@@ -13,7 +13,7 @@ class WidgetWithTopLeftHeading extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       Text(heading, style: TextStyles.MainAccent),
-      const Gap(height: 8.0),
+      const SizedBox(height: 8.0),
       widget
     ]);
   }
