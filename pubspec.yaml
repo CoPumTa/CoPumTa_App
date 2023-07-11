@@ -59,3 +59,9 @@ flutter:
           weight: 800
         - asset: assets/fonts/Poppins/Poppins-Black.ttf
           weight: 900
+    - family: D2Coding
+      fonts:
+        - asset: assets/fonts/D2Coding/D2Coding-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/D2Coding/D2Coding-Bold.ttf
+          weight: 700

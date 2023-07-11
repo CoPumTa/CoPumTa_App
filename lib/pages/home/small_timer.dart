@@ -1,11 +1,8 @@
-import 'package:client/data/models/home_model.dart';
-import 'package:client/data/providers/timer_provider.dart';
 import 'package:client/pages/timer/timer.dart';
 import 'package:client/style.dart';
 import 'package:client/utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SmallTimer extends StatefulWidget {
@@ -31,9 +28,6 @@ class _SmallTimerState extends State<SmallTimer> {
     setState(() {
       _previousElapsedTime = prefValue;
     });
-    // homePageController.todayStopWatch
-    //     .setPresetTime(mSec: _previousElapsedTime);
-    // });
   }
 
   @override
@@ -43,7 +37,7 @@ class _SmallTimerState extends State<SmallTimer> {
         height: 150,
         color: mainColor,
         child: Padding(
-            padding: EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 0),
+            padding: const EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 0),
             child:
                 Column(mainAxisAlignment: MainAxisAlignment.center, children: [
               const Row(
@@ -51,7 +45,7 @@ class _SmallTimerState extends State<SmallTimer> {
                   SizedBox(
                     width: 8.0,
                   ),
-                  Text("Today\'s", style: TextStyles.Hint)
+                  Text("Today's Flow Time", style: TextStyles.Hint)
                 ],
               ),
               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
@@ -65,8 +59,8 @@ class _SmallTimerState extends State<SmallTimer> {
                         color: Colors.white),
                   ),
                 ),
-                SizedBox(width: 16.0),
-                Container(
+                const SizedBox(width: 16.0),
+                SizedBox(
                     width: 44,
                     height: 44,
                     child: ElevatedButton(

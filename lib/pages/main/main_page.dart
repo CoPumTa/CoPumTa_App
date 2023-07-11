@@ -2,7 +2,6 @@ import 'package:client/pages/challenge/challenge_page.dart';
 import 'package:client/pages/home/home_page.dart';
 import 'package:client/pages/setting/setting_page.dart';
 import 'package:client/style.dart';
-import 'package:client/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:client/pages/main/bottom_navigation_bar.dart';
 
@@ -32,7 +31,7 @@ class _MainPageState extends State<MainPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: lightColor,
+      backgroundColor: subColor,
       // appBar:
       // AppBar(
       //   toolbarHeight: 36.0,

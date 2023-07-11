@@ -2,6 +2,7 @@ import 'package:client/data/models/top_friend.dart';
 import 'package:client/pages/home/home_page_controller.dart';
 import 'package:client/pages/home/medal.dart';
 import 'package:client/pages/home/small_timer.dart';
+import 'package:client/style.dart';
 import 'package:client/widgets/widgetWithTopLeftHeading.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -28,16 +29,8 @@ class _HomePageState extends StateMVC<HomePage> {
 
   @override
   void dispose() {
-    // _saveElapsedTime();
-    // homePageController.todayStopWatch.dispose();
     super.dispose();
   }
-
-  // void _saveElapsedTime() async {
-  //   SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   debugPrint("_previousElapsedTime: $_previousElapsedTime");
-  //   await prefs.setInt('elapsedTime', _previousElapsedTime);
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -47,11 +40,10 @@ class _HomePageState extends StateMVC<HomePage> {
       SmallTimer(),
       // Ranking
       Card(
-        color: Colors.white,
+        color: lightColor,
         shape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
-        shadowColor: Colors.transparent,
-        margin: EdgeInsets.fromLTRB(12.0, 12.0, 12.0, 0),
+        margin: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 0),
         child: Padding(
             padding: const EdgeInsets.fromLTRB(16.0, 12.0, 16.0, 12.0),
             child: WidgetWithTopLeftHeading(
@@ -77,17 +69,21 @@ class _HomePageState extends StateMVC<HomePage> {
 
       // github contributions
       Card(
-        color: Colors.white,
+        color: lightColor,
         shape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
-        shadowColor: Colors.transparent,
-        margin: EdgeInsets.fromLTRB(12.0, 12.0, 12.0, 0),
+        margin: const EdgeInsets.fromLTRB(16, 16, 16, 0),
         child: Padding(
-            padding: const EdgeInsets.fromLTRB(16.0, 12.0, 16.0, 12.0),
+            padding: const EdgeInsets.fromLTRB(16.0, 12.0, 16.0, 16.0),
             child: WidgetWithTopLeftHeading(
                 heading: "My Flow of Programming",
-                widget:
-                    SvgPicture.network("https://ghchart.rshah.org/coitloz88"))),
+                widget: Card(
+                    color: Color(0x20526D82),
+                    shadowColor: Colors.transparent,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0)),
+                    child: SvgPicture.network(
+                        "https://ghchart.rshah.org/coitloz88")))),
       ),
     ]);
   }

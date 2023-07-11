@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:client/style.dart';
 
 class LoginSocialButton extends StatelessWidget {
   final String imageSource;

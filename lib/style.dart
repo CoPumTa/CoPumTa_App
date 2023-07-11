@@ -48,3 +48,26 @@ class TextStyles {
   static const Comment =
       TextStyle(fontSize: 16, color: subColor, fontWeight: FontWeight.w400);
 }
+
+class KorTextStyles {
+  static const Main = TextStyle(
+      fontSize: 18,
+      color: mainColor,
+      fontWeight: FontWeight.w400,
+      fontFamily: 'D2Coding');
+  static const lightMain = TextStyle(
+      fontSize: 18,
+      color: lightColor,
+      fontWeight: FontWeight.w400,
+      fontFamily: 'D2Coding');
+  static const lightTertiary = TextStyle(
+      fontSize: 20,
+      color: lightColor,
+      fontWeight: FontWeight.w400,
+      fontFamily: 'D2Coding');
+  static const Hint = TextStyle(
+      fontSize: 18,
+      color: subColor,
+      fontWeight: FontWeight.w400,
+      fontFamily: 'D2Coding');
+}
