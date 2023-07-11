@@ -9,6 +9,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
 
 class HomePage extends StatefulWidget {
@@ -19,9 +20,38 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends StateMVC<HomePage> {
   double gap = 24.0;
   late HomePageController homePageController;
+  int _previousElapsedTime = 0;
 
   _HomePageState() : super(HomePageController()) {
     homePageController = controller as HomePageController;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _loadElapsedTime();
+  }
+
+  @override
+  void dispose() {
+    _saveElapsedTime();
+    homePageController.todayStopWatch.dispose();
+    super.dispose();
+  }
+
+  void _loadElapsedTime() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _previousElapsedTime = prefs.getInt('elapsedTime') ?? 0;
+      homePageController.todayStopWatch
+          .setPresetTime(mSec: _previousElapsedTime);
+    });
+  }
+
+  void _saveElapsedTime() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    debugPrint("_previousElapsedTime: $_previousElapsedTime");
+    await prefs.setInt('elapsedTime', _previousElapsedTime);
   }
 
   // TODO: todayStopWatch에 currentStopWatch를 더하는게 아니라, dispose될 때 todayStopWatch를 disk에 저장해야함
@@ -62,6 +92,7 @@ class _HomePageState extends StateMVC<HomePage> {
                                 final displayTime =
                                     StopWatchTimer.getDisplayTime(value,
                                         milliSecond: false);
+                                _previousElapsedTime = value;
                                 return Padding(
                                   padding: const EdgeInsets.all(8),
                                   child: Text(
@@ -131,19 +162,19 @@ class _HomePageState extends StateMVC<HomePage> {
       ),
 
       // github contributions
-      // Card(
-      //   color: Colors.white,
-      //   shape:
-      //       RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
-      //   shadowColor: Colors.transparent,
-      //   margin: EdgeInsets.fromLTRB(12.0, 12.0, 12.0, 0),
-      //   child: Padding(
-      //       padding: const EdgeInsets.fromLTRB(16.0, 12.0, 16.0, 12.0),
-      //       child: WidgetWithTopLeftHeading(
-      //           heading: "My Flow of Programming",
-      //           widget:
-      //               SvgPicture.network("http://ghchart.rshah.org/coitloz88"))),
-      // ),
+      Card(
+        color: Colors.white,
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+        shadowColor: Colors.transparent,
+        margin: EdgeInsets.fromLTRB(12.0, 12.0, 12.0, 0),
+        child: Padding(
+            padding: const EdgeInsets.fromLTRB(16.0, 12.0, 16.0, 12.0),
+            child: WidgetWithTopLeftHeading(
+                heading: "My Flow of Programming",
+                widget:
+                    SvgPicture.network("https://ghchart.rshah.org/coitloz88"))),
+      ),
     ]);
   }
 }

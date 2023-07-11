@@ -28,6 +28,7 @@ dependencies:
   kakao_flutter_sdk_user: ^1.4.3
   flutter_svg: ^2.0.7
   stop_watch_timer: ^3.0.0
+  shared_preferences: ^2.2.0
 
 dev_dependencies:
   flutter_test:

@@ -30,21 +30,21 @@ const BoxDecoration kDefaultRoundedBorderDecoration = BoxDecoration(
 
 class TextStyles {
   static const Primary =
-      TextStyle(fontSize: 20, color: blackColor, fontWeight: FontWeight.w700);
+      TextStyle(fontSize: 24, color: blackColor, fontWeight: FontWeight.w700);
   static const Secondary =
-      TextStyle(fontSize: 16, color: darkColor, fontWeight: FontWeight.w700);
+      TextStyle(fontSize: 20, color: darkColor, fontWeight: FontWeight.w700);
   static const Tertiary =
-      TextStyle(fontSize: 16, color: mainColor, fontWeight: FontWeight.w500);
+      TextStyle(fontSize: 20, color: mainColor, fontWeight: FontWeight.w500);
   static const lightTertiary =
-      TextStyle(fontSize: 16, color: lightColor, fontWeight: FontWeight.w500);
+      TextStyle(fontSize: 20, color: lightColor, fontWeight: FontWeight.w500);
   static const Main =
-      TextStyle(fontSize: 14, color: mainColor, fontWeight: FontWeight.w400);
+      TextStyle(fontSize: 18, color: mainColor, fontWeight: FontWeight.w400);
   static const lightMain =
-      TextStyle(fontSize: 14, color: lightColor, fontWeight: FontWeight.w400);
+      TextStyle(fontSize: 18, color: lightColor, fontWeight: FontWeight.w400);
   static const MainAccent =
-      TextStyle(fontSize: 14, color: blackColor, fontWeight: FontWeight.w400);
+      TextStyle(fontSize: 18, color: blackColor, fontWeight: FontWeight.w400);
   static const Hint =
-      TextStyle(fontSize: 14, color: subColor, fontWeight: FontWeight.w400);
+      TextStyle(fontSize: 18, color: subColor, fontWeight: FontWeight.w400);
   static const Comment =
-      TextStyle(fontSize: 12, color: subColor, fontWeight: FontWeight.w400);
+      TextStyle(fontSize: 16, color: subColor, fontWeight: FontWeight.w400);
 }

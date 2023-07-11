@@ -5,7 +5,8 @@ class AuthProvider with ChangeNotifier {
   // 로그인을 유지하려면, sharedPreference 등을 사용하여 local에 저장하여야 할듯?
   String? cookie = null;
 
-  bool get isLoggedIn => (cookie != null);
+  // bool get isLoggedIn => (cookie != null);
+  bool get isLoggedIn => true;
 
   void login(String cookie) {
     this.cookie = cookie;
