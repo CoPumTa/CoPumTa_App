@@ -1,33 +1,49 @@
+import 'package:client/data/providers/timer_provider.dart';
 import 'package:client/style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
 
 class Timer extends StatefulWidget {
-  final StopWatchTimer todayStopWatch;
+  final int accumulatedTime;
 
-  const Timer({super.key, required this.todayStopWatch});
+  const Timer({super.key, required this.accumulatedTime});
   @override
   _TimerState createState() => _TimerState();
 }
 
 class _TimerState extends StateMVC<Timer> {
   final currentStopWatch = StopWatchTimer();
+  final todayStopWatch = StopWatchTimer();
+  int _previousElapsedTime = 0;
 
   @override
   void initState() {
-    widget.todayStopWatch.onStartTimer();
+    todayStopWatch.setPresetTime(mSec: widget.accumulatedTime, add: false);
+    todayStopWatch.onStartTimer();
     currentStopWatch.onStartTimer();
     super.initState();
   }
 
   @override
-  void dispose() async {
+  void dispose() {
+    disposeTimers();
     super.dispose();
-    widget.todayStopWatch.onStopTimer();
+  }
+
+  void disposeTimers() async {
+    Provider.of<TimerProvider>(context, listen: false)
+        .setFlowTime(_previousElapsedTime);
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    debugPrint("저장하기 전의 _previousElapsedTime: $_previousElapsedTime");
+    await prefs.setInt('elapsedTime', _previousElapsedTime);
+
+    await todayStopWatch.dispose();
     await currentStopWatch.dispose();
   }
 
@@ -71,12 +87,13 @@ class _TimerState extends StateMVC<Timer> {
               ),
               SizedBox(width: 8.0),
               StreamBuilder<int>(
-                  stream: widget.todayStopWatch.rawTime,
-                  initialData: widget.todayStopWatch.rawTime.value,
+                  stream: todayStopWatch.rawTime,
+                  initialData: todayStopWatch.rawTime.value,
                   builder: (context, snap) {
                     final value = snap.data!;
                     final displayTime = StopWatchTimer.getDisplayTime(value,
                         milliSecond: false);
+                    _previousElapsedTime = value;
                     return Text(
                       displayTime,
                       style: TextStyles.lightTertiary,
@@ -103,7 +120,7 @@ class _TimerState extends StateMVC<Timer> {
                     child: ElevatedButton(
                         onPressed: () {
                           currentStopWatch.onStopTimer();
-                          widget.todayStopWatch.onStopTimer();
+                          todayStopWatch.onStopTimer();
                           Navigator.pop(context);
                         },
                         style: ElevatedButton.styleFrom(

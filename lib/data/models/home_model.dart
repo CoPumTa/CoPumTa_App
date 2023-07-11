@@ -7,9 +7,9 @@ currentTimer는 view에서 매번 재생성해주지만.. dispose될 때 이때�
  */
 
 class HomeModel {
-  StopWatchTimer _todayStopWatch = StopWatchTimer();
+  // StopWatchTimer _todayStopWatch = StopWatchTimer();
 
-  StopWatchTimer get todayStopWatch => _todayStopWatch;
+  // StopWatchTimer get todayStopWatch => _todayStopWatch;
 
   List<TopFriend> _topFriends = [TopFriend(), TopFriend(), TopFriend()];
 

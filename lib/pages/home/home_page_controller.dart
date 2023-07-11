@@ -14,7 +14,7 @@ class HomePageController extends ControllerMVC {
       : _homeModel = HomeModel(),
         super(state);
 
-  StopWatchTimer get todayStopWatch => _homeModel.todayStopWatch;
+  // StopWatchTimer get todayStopWatch => _homeModel.todayStopWatch;
   List<TopFriend> get topFriends => _homeModel.topFriends;
 
   void update() => setState(() {});
