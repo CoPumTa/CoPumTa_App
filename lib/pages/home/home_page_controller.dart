@@ -1,7 +1,6 @@
 import 'package:client/data/models/home_model.dart';
 import 'package:client/data/models/top_friend.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
-import 'package:stop_watch_timer/stop_watch_timer.dart';
 
 class HomePageController extends ControllerMVC {
   final HomeModel _homeModel;

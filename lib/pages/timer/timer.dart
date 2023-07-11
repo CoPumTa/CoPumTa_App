@@ -74,7 +74,7 @@ class TimerState extends StateMVC<Timer> {
                           child: Text(
                             displayTime,
                             style: const TextStyle(
-                                fontSize: 58,
+                                fontSize: 64,
                                 fontWeight: FontWeight.w700,
                                 color: lightColor,
                                 fontFamily: 'D2Coding'),
@@ -107,10 +107,17 @@ class TimerState extends StateMVC<Timer> {
                     ],
                   ),
                   const SizedBox(height: 4.0),
-                  Text(
-                    QUOTES[quoteIdx],
-                    style: KorTextStyles.Hint,
-                  ),
+                  Padding(
+                      padding: const EdgeInsets.all(22.0),
+                      child: Wrap(
+                          alignment: WrapAlignment.center,
+                          crossAxisAlignment: WrapCrossAlignment.center,
+                          runAlignment: WrapAlignment.center,
+                          children: [
+                            Text(QUOTES[quoteIdx],
+                                style: KorTextStyles.Hint,
+                                textAlign: TextAlign.center),
+                          ])),
                   const SizedBox(
                     height: 152,
                   ),

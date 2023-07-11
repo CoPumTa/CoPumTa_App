@@ -72,7 +72,7 @@ class _HomePageState extends StateMVC<HomePage> {
         color: lightColor,
         shape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
-        margin: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+        margin: const EdgeInsets.fromLTRB(16, 16, 16, 4),
         child: Padding(
             padding: const EdgeInsets.fromLTRB(16.0, 12.0, 16.0, 16.0),
             child: WidgetWithTopLeftHeading(
@@ -83,6 +83,7 @@ class _HomePageState extends StateMVC<HomePage> {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10.0)),
                     child: SvgPicture.network(
+                        // TODO: 유저 정보 받아와서 ID 변경해야함
                         "https://ghchart.rshah.org/coitloz88")))),
       ),
     ]);

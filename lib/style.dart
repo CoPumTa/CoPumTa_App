@@ -51,22 +51,22 @@ class TextStyles {
 
 class KorTextStyles {
   static const Main = TextStyle(
-      fontSize: 18,
+      fontSize: 22,
       color: mainColor,
       fontWeight: FontWeight.w400,
       fontFamily: 'D2Coding');
   static const lightMain = TextStyle(
-      fontSize: 18,
+      fontSize: 22,
       color: lightColor,
       fontWeight: FontWeight.w400,
       fontFamily: 'D2Coding');
   static const lightTertiary = TextStyle(
-      fontSize: 20,
+      fontSize: 24,
       color: lightColor,
       fontWeight: FontWeight.w400,
       fontFamily: 'D2Coding');
   static const Hint = TextStyle(
-      fontSize: 18,
+      fontSize: 22,
       color: subColor,
       fontWeight: FontWeight.w400,
       fontFamily: 'D2Coding');
