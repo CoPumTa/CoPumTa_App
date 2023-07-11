@@ -1,9 +1,12 @@
+import 'package:client/pages/challenge/challenge_page.dart';
+import 'package:client/pages/home/home_page.dart';
+import 'package:client/pages/setting/setting_page.dart';
+import 'package:client/style.dart';
+import 'package:client/utils.dart';
 import 'package:flutter/material.dart';
-import 'package:client/components/bottom_navigation_bar.dart';
-import 'package:client/pages/tab2.dart';
-import 'package:client/pages/tab3.dart';
-import 'package:client/pages/timer.dart';
+import 'package:client/pages/main/bottom_navigation_bar.dart';
 
+/* 로그인 성공시 출력되는 main page로, 세개의 탭을 조정하기 위함 */
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
 
@@ -29,10 +32,20 @@ class _MainPageState extends State<MainPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: lightColor,
+      appBar: AppBar(
+        toolbarHeight: 36.0,
+        backgroundColor: mainColor,
+        elevation: 0,
+        title: Text(getToday()),
+        titleTextStyle: TextStyle(
+            color: lightColor, fontWeight: FontWeight.w500, fontSize: 16),
+        centerTitle: true,
+      ),
       body: TabBarView(
           physics: const NeverScrollableScrollPhysics(),
           controller: _tabController,
-          children: [Timer(), Tab2(), Tab3()]),
+          children: [HomePage(), ChallengePage(), SettingPage()]),
       bottomNavigationBar: NavBar(_tabController),
     );
   }

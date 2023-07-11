@@ -24,6 +24,7 @@ class _LoginPageState extends StateMVC<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        resizeToAvoidBottomInset: false,
         body: Padding(
             padding: EdgeInsetsDirectional.fromSTEB(30, 0, 30, 0),
             child: Column(
@@ -32,22 +33,22 @@ class _LoginPageState extends StateMVC<LoginPage> {
                 children: [
                   Text("Hey there,", style: TextStyles.Secondary),
                   Text("Welcome Back", style: TextStyles.Primary),
-                  Gap(height: gap * 2),
+                  SizedBox(height: gap * 2),
                   LoginTextInput(
                     hintText: 'Email',
                     prefixIcon: Icons.mail,
                     controller: loginPageController.idController,
                   ),
-                  Gap(height: gap),
+                  SizedBox(height: gap),
                   LoginTextInput(
                     hintText: 'Password',
                     prefixIcon: Icons.lock,
                     controller: loginPageController.passwordController,
                     hideInput: true,
                   ),
-                  Gap(height: gap),
+                  SizedBox(height: gap),
                   Text("Forgot your password?", style: TextStyles.Comment),
-                  Gap(height: gap * 2),
+                  SizedBox(height: gap * 2),
                   CupertinoButton.filled(
                       child: Text('Login'),
                       onPressed: () {
@@ -56,7 +57,7 @@ class _LoginPageState extends StateMVC<LoginPage> {
                             loginPageController.passwordController.text,
                             context);
                       }),
-                  Gap(height: gap * 2),
+                  SizedBox(height: gap * 2),
                   Row(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -84,7 +85,7 @@ class _LoginPageState extends StateMVC<LoginPage> {
                       ),
                     ],
                   ),
-                  Gap(height: gap * 2),
+                  SizedBox(height: gap * 2),
                   Row(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -99,7 +100,7 @@ class _LoginPageState extends StateMVC<LoginPage> {
                           onPressedFunction: loginPageController.onLoginKakao,
                         ),
                       ]),
-                  Gap(height: gap * 2),
+                  SizedBox(height: gap * 2),
                   Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       mainAxisSize: MainAxisSize.min,

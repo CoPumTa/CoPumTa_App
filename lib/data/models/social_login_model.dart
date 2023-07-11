@@ -4,12 +4,9 @@ import 'package:client/data/constant.dart';
 import 'package:client/data/models/login_model.dart';
 import 'package:client/data/providers/auth_provider.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/services.dart';
 import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
-
-import 'login_model.dart';
 
 class SocialLoginModel {
   User? user;
@@ -68,7 +65,8 @@ class SocialLoginModel {
           headers: {"Content-Type": "application/json"},
           body: json
               .encode({"email": email, "snsId": snsId, "provider": provider}));
-      if (response.statusCode == 401 || response.headers["set-cookie"] == null) {
+      if (response.statusCode == 401 ||
+          response.headers["set-cookie"] == null) {
         debugPrint("login 정보 불일치");
       } else {
         LoginModel.cookie = response.headers["set-cookie"]!;

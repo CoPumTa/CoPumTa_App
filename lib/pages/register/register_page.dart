@@ -9,6 +9,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
+/* 회원 가입 페이지 */
 class RegisterPage extends StatefulWidget {
   @override
   _RegisterPageState createState() => _RegisterPageState();
@@ -26,6 +27,7 @@ class _RegisterPageState extends StateMVC<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        resizeToAvoidBottomInset: false,
         body: Padding(
             padding: EdgeInsetsDirectional.fromSTEB(30, 0, 30, 0),
             child: Column(
@@ -34,32 +36,32 @@ class _RegisterPageState extends StateMVC<RegisterPage> {
                 children: [
                   Text("Hey there,", style: TextStyles.Secondary),
                   Text("Create an account", style: TextStyles.Primary),
-                  Gap(height: gap * 2),
+                  SizedBox(height: gap * 2),
                   LoginTextInput(
                     hintText: 'Name',
                     prefixIcon: Icons.person,
                     controller: registerPageController.nameController,
                   ),
-                  Gap(height: gap),
+                  SizedBox(height: gap),
                   LoginTextInput(
                     hintText: 'Email',
                     prefixIcon: Icons.mail,
                     controller: registerPageController.idController,
                   ),
-                  Gap(height: gap),
+                  SizedBox(height: gap),
                   LoginTextInput(
                     hintText: 'Password',
                     prefixIcon: Icons.lock,
                     controller: registerPageController.passwordController,
                     hideInput: true,
                   ),
-                  Gap(height: gap),
+                  SizedBox(height: gap),
                   CheckboxWithComment(
                     comment:
                         "By continuing you accept our Privacy Policy and Term of Use.",
                     checkboxController: registerPageController,
                   ),
-                  Gap(height: gap * 2),
+                  SizedBox(height: gap * 2),
                   CupertinoButton.filled(
                       child: Text('Register'),
                       onPressed: () {
@@ -69,7 +71,7 @@ class _RegisterPageState extends StateMVC<RegisterPage> {
                             registerPageController.passwordController.text,
                             context);
                       }),
-                  Gap(height: gap * 2),
+                  SizedBox(height: gap * 2),
                   Row(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -97,7 +99,7 @@ class _RegisterPageState extends StateMVC<RegisterPage> {
                       ),
                     ],
                   ),
-                  Gap(height: gap * 2),
+                  SizedBox(height: gap * 2),
                   Row(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -114,7 +116,7 @@ class _RegisterPageState extends StateMVC<RegisterPage> {
                               registerPageController.onRegisterKakao,
                         ),
                       ]),
-                  Gap(height: gap * 2),
+                  SizedBox(height: gap * 2),
                   Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       mainAxisSize: MainAxisSize.min,
