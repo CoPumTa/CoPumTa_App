@@ -1,3 +1,4 @@
+import 'package:client/data/providers/timer_provider.dart';
 import 'package:client/pages/login/login_page.dart';
 import 'package:client/pages/main/main_page.dart';
 import 'package:flutter/material.dart';
@@ -8,9 +9,7 @@ import 'data/providers/auth_provider.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   KakaoSdk.init(nativeAppKey: 'dd7c56431141df80cecd3c764bd7e2ee');
-  runApp(ChangeNotifierProvider<AuthProvider>(
-      create: (_) => AuthProvider(), // 인증 관련 상태를 제공하는 Auth 클래스를 생성합니다.
-      child: MainApp()));
+  runApp(MainApp());
 }
 
 class MainApp extends StatefulWidget {
@@ -23,14 +22,17 @@ class MainApp extends StatefulWidget {
 class _MainAppState extends State<MainApp> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        theme: ThemeData(fontFamily: 'Poppins'),
-        home: Consumer<AuthProvider>(builder: (context, auth, _) {
-          if (auth.isLoggedIn) {
-            return MainPage();
-          } else {
-            return LoginPage();
-          }
+    return MultiProvider(
+        providers: [
+          ChangeNotifierProvider<AuthProvider>(create: (_) => AuthProvider()),
+          ChangeNotifierProvider<TimerProvider>(create: (_) => TimerProvider())
+        ],
+        builder: ((context, child) {
+          return MaterialApp(
+              theme: ThemeData(fontFamily: 'Poppins'),
+              home: Provider.of<AuthProvider>(context).isLoggedIn
+                  ? MainPage()
+                  : LoginPage());
         }));
   }
 }

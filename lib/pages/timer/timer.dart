@@ -1,4 +1,6 @@
+import 'package:client/data/models/home_model.dart';
 import 'package:client/data/providers/timer_provider.dart';
+import 'package:client/pages/home/small_timer.dart';
 import 'package:client/style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +10,7 @@ import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
+import 'dart:async';
 
 class Timer extends StatefulWidget {
   final int accumulatedTime;
@@ -30,17 +33,23 @@ class _TimerState extends StateMVC<Timer> {
     super.initState();
   }
 
+  // @override
+  // void deactivate() {
+  //   super.deactivate();
+  // }
+
   @override
   void dispose() {
+    HomeModel.flowTime = _previousElapsedTime;
     disposeTimers();
     super.dispose();
   }
 
+  // void async
+
   void disposeTimers() async {
-    Provider.of<TimerProvider>(context, listen: false)
-        .setFlowTime(_previousElapsedTime);
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    debugPrint("저장하기 전의 _previousElapsedTime: $_previousElapsedTime");
+    debugPrint("저장하기 직전의 _previousElapsedTime: $_previousElapsedTime");
     await prefs.setInt('elapsedTime', _previousElapsedTime);
 
     await todayStopWatch.dispose();
@@ -121,7 +130,7 @@ class _TimerState extends StateMVC<Timer> {
                         onPressed: () {
                           currentStopWatch.onStopTimer();
                           todayStopWatch.onStopTimer();
-                          Navigator.pop(context);
+                          Navigator.pop(context, _previousElapsedTime);
                         },
                         style: ElevatedButton.styleFrom(
                             backgroundColor: mainColor,

@@ -1,3 +1,4 @@
+import 'package:client/data/models/home_model.dart';
 import 'package:client/data/providers/timer_provider.dart';
 import 'package:client/pages/timer/timer.dart';
 import 'package:client/style.dart';
@@ -24,8 +25,12 @@ class _SmallTimerState extends State<SmallTimer> {
   void _loadElapsedTime() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     // setState(() {
-    _previousElapsedTime = prefs.getInt('elapsedTime') ?? 0;
-    debugPrint('loaded _previousElapsedTime: $_previousElapsedTime');
+    HomeModel.flowTime = prefs.getInt('elapsedTime') ?? 0;
+
+    debugPrint('loaded _previousElapsedTime: ${HomeModel.flowTime}');
+    setState(() {
+      _previousElapsedTime = HomeModel.flowTime;
+    });
     // homePageController.todayStopWatch
     //     .setPresetTime(mSec: _previousElapsedTime);
     // });
@@ -49,48 +54,44 @@ class _SmallTimerState extends State<SmallTimer> {
                   Text("Today\'s", style: TextStyles.Hint)
                 ],
               ),
-
-              Consumer<TimerProvider>(
-                builder: (context, timer, _) => Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8),
-                        child: Text(
-                          formatMilliseconds(
-                              Provider.of<TimerProvider>(context).flowTime),
-                          style: const TextStyle(
-                              fontSize: 54,
-                              fontWeight: FontWeight.w700,
-                              color: Colors.white),
-                        ),
-                      ),
-                      SizedBox(width: 16.0),
-                      Container(
-                          width: 44,
-                          height: 44,
-                          child: ElevatedButton(
-                              onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => Timer(
-                                              accumulatedTime:
-                                                  Provider.of<TimerProvider>(
-                                                          context)
-                                                      .flowTime,
-                                            )));
-                              },
-                              style: ElevatedButton.styleFrom(
-                                  backgroundColor: darkColor,
-                                  shadowColor: Colors.transparent,
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius:
-                                          BorderRadius.circular(10.0))),
-                              child: const Icon(CupertinoIcons.play,
-                                  size: 24, color: Colors.white)))
-                    ]),
-              ),
+              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                Padding(
+                  padding: const EdgeInsets.all(8),
+                  child: Text(
+                    formatMilliseconds(_previousElapsedTime),
+                    style: const TextStyle(
+                        fontSize: 54,
+                        fontWeight: FontWeight.w700,
+                        color: Colors.white),
+                  ),
+                ),
+                SizedBox(width: 16.0),
+                Container(
+                    width: 44,
+                    height: 44,
+                    child: ElevatedButton(
+                        onPressed: () async {
+                          dynamic result = await Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Timer(
+                                      accumulatedTime:
+                                          _previousElapsedTime))).then((value) {
+                            setState(() {
+                              _previousElapsedTime = value ?? 0;
+                            });
+                          });
+                          debugPrint("result is... ${result}");
+                          // await _loadElapsedTime();
+                        },
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: darkColor,
+                            shadowColor: Colors.transparent,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10.0))),
+                        child: const Icon(CupertinoIcons.play,
+                            size: 24, color: Colors.white)))
+              ]),
 
               // )
             ])));

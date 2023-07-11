@@ -10,7 +10,7 @@ class HomeModel {
   // StopWatchTimer _todayStopWatch = StopWatchTimer();
 
   // StopWatchTimer get todayStopWatch => _todayStopWatch;
-
+  static int flowTime = 0;
   List<TopFriend> _topFriends = [TopFriend(), TopFriend(), TopFriend()];
 
   List<TopFriend> get topFriends => _topFriends;
