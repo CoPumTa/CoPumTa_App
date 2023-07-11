@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
+import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
 
 class Timer extends StatefulWidget {
@@ -10,10 +11,10 @@ class Timer extends StatefulWidget {
 
   const Timer({super.key, required this.todayStopWatch});
   @override
-  State<Timer> createState() => _TimerState();
+  _TimerState createState() => _TimerState();
 }
 
-class _TimerState extends State<Timer> {
+class _TimerState extends StateMVC<Timer> {
   final currentStopWatch = StopWatchTimer();
 
   @override

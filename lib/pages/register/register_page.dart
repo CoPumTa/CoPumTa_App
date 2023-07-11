@@ -2,7 +2,6 @@ import 'package:client/pages/login/login_page.dart';
 import 'package:client/pages/register/register_page_controller.dart';
 import 'package:client/style.dart';
 import 'package:client/widgets/checkbox_with_comment.dart';
-import 'package:client/widgets/gap.dart';
 import 'package:client/widgets/login_social_button.dart';
 import 'package:client/widgets/login_text_input.dart';
 import 'package:flutter/cupertino.dart';

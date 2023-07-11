@@ -1,5 +1,4 @@
 import 'package:client/style.dart';
-import 'package:client/widgets/gap.dart';
 import 'package:flutter/material.dart';
 
 class Medal extends StatelessWidget {
