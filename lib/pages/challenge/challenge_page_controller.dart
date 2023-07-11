@@ -14,16 +14,26 @@ class ChallengePageController {
   }
 
   Future<void> getChallengeList(String session) async {
-    final request = Uri.parse("${BASE_URL}challenge/participating/");
+    final request = Uri.parse("${BASE_URL}challenge/participating");
     try {
-      final response = await http.post(request,
-        headers: {"Content-Type": "application/json", "set-cookie": session},);
-      if (response.statusCode == 401 || response.headers["set-cookie"] == null) {
+      final response = await http.get(request,
+        headers: {"Content-Type": "application/json", "Cookie": session},);
+      if (response.statusCode == 401) {
         debugPrint("failed to get Challenges");
       } else {
         // LoginModel.cookie = response.headers["set-cookie"]!;
         // Provider.of<AuthProvider>(context, listen: false).login();
-        final data = json.decode(response.body);
+        final List<dynamic> data = json.decode(json.decode(response.body));
+        data.forEach((c) {
+          challengeList.add(ChallengeListItemModel(
+            c["challengeId"],
+            c["title"],
+            c["subTitle"],
+            DateTime.parse(c["startDay"]),
+            DateTime.parse(c["endDay"]),
+            c["prize"],
+            c["userId"]));
+        });
         debugPrint("response body is ${data.toString()}");
       }
     } catch (error) {
