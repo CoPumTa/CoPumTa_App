@@ -9,8 +9,6 @@ class LoginModel {
   String _email = "";
   String _password = "";
 
-  static String cookie = "";
-
   set email(String id) => (_email = id);
   String get email => _email;
 
@@ -24,11 +22,12 @@ class LoginModel {
       final response = await http.post(request,
           headers: {"Content-Type": "application/json"},
           body: json.encode({"email": email, "password": password}));
-      if (response.statusCode == 401 || response.headers["set-cookie"] == null) {
+      if (response.statusCode == 401 ||
+          response.headers["set-cookie"] == null) {
         debugPrint("login 정보 불일치");
       } else {
-        LoginModel.cookie = response.headers["set-cookie"]!;
-        Provider.of<AuthProvider>(context, listen: false).login();
+        Provider.of<AuthProvider>(context, listen: false)
+            .login(response.headers["set-cookie"]!);
       }
     } catch (error) {
       debugPrint("login 에러: $error");
