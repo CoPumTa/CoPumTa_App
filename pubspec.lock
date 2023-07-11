@@ -408,8 +408,16 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.0.5"
-  shared_preferences:
+  rxdart:
     dependency: transitive
+    description:
+      name: rxdart
+      sha256: "0c7c0cedd93788d996e33041ffecda924cc54389199cde4e6a34b440f50044cb"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.27.7"
+  shared_preferences:
+    dependency: "direct main"
     description:
       name: shared_preferences
       sha256: "0344316c947ffeb3a529eac929e1978fcd37c26be4e8468628bac399365a3ca1"
@@ -485,6 +493,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.11.0"
+  stop_watch_timer:
+    dependency: "direct main"
+    description:
+      name: stop_watch_timer
+      sha256: "7d06b0cc6608987c4b627a957325261d83181ebd81a3036519590dd51b94ad68"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.0"
   stream_channel:
     dependency: transitive
     description:
@@ -501,6 +517,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.0"
+  syncfusion_flutter_core:
+    dependency: transitive
+    description:
+      name: syncfusion_flutter_core
+      sha256: a38808b2636bafc6466079668232eb228b85aa7c3d83545a15cc3b593d40b315
+      url: "https://pub.dev"
+    source: hosted
+    version: "22.1.38"
+  syncfusion_flutter_gauges:
+    dependency: "direct main"
+    description:
+      name: syncfusion_flutter_gauges
+      sha256: "17aed5812b0a1eefe7cd1f82bb039046b0f0a5c89c8b8d09ce82cfeba2e800b9"
+      url: "https://pub.dev"
+    source: hosted
+    version: "22.1.38"
   term_glyph:
     dependency: transitive
     description:

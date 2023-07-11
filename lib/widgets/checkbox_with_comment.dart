@@ -17,7 +17,7 @@ class CheckboxWithComment extends StatelessWidget {
             onChanged: (checked) {
               checkboxController.setChecked(checked);
             }),
-        Expanded(
+        const Expanded(
           child: Wrap(
               spacing: 0,
               runSpacing: 0,

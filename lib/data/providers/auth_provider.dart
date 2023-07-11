@@ -7,7 +7,8 @@ class AuthProvider with ChangeNotifier {
   String? cookie = null;
   final _prefs = SharedPreferences.getInstance();
 
-  bool get isLoggedIn => (cookie != null);
+  // bool get isLoggedIn => (cookie != null);
+  bool get isLoggedIn => true;
 
   void login(String cookie) {
     this.cookie = cookie;

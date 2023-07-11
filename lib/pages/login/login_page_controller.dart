@@ -1,11 +1,9 @@
 import 'package:client/data/models/social_login_model.dart';
-import 'package:client/data/providers/auth_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:client/data/models/login_model.dart';
-import 'package:provider/provider.dart';
 
 class LoginPageController extends ControllerMVC {
   final LoginModel _login;

@@ -23,13 +23,13 @@ dependencies:
   # for mvc pattern
   mvc_pattern: ^8.12.0
   flutter_native_splash: ^2.3.1
-  intl: ^0.18.1
   provider: ^6.0.5
-  shared_preferences: ^2.2.0
   syncfusion_flutter_gauges: ^22.1.38
   http: ^1.1.0
   kakao_flutter_sdk_user: ^1.4.3
   flutter_svg: ^2.0.7
+  stop_watch_timer: ^3.0.0
+  shared_preferences: ^2.2.0
 
 dev_dependencies:
   flutter_test:
@@ -60,3 +60,9 @@ flutter:
           weight: 800
         - asset: assets/fonts/Poppins/Poppins-Black.ttf
           weight: 900
+    - family: D2Coding
+      fonts:
+        - asset: assets/fonts/D2Coding/D2Coding-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/D2Coding/D2Coding-Bold.ttf
+          weight: 700

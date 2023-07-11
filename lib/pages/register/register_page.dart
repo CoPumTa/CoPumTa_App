@@ -2,7 +2,6 @@ import 'package:client/pages/login/login_page.dart';
 import 'package:client/pages/register/register_page_controller.dart';
 import 'package:client/style.dart';
 import 'package:client/widgets/checkbox_with_comment.dart';
-import 'package:client/widgets/gap.dart';
 import 'package:client/widgets/login_social_button.dart';
 import 'package:client/widgets/login_text_input.dart';
 import 'package:flutter/cupertino.dart';
@@ -11,6 +10,8 @@ import 'package:mvc_pattern/mvc_pattern.dart';
 
 /* 회원 가입 페이지 */
 class RegisterPage extends StatefulWidget {
+  const RegisterPage({super.key});
+
   @override
   _RegisterPageState createState() => _RegisterPageState();
 }
@@ -34,8 +35,8 @@ class _RegisterPageState extends StateMVC<RegisterPage> {
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text("Hey there,", style: TextStyles.Secondary),
-                  Text("Create an account", style: TextStyles.Primary),
+                  const Text("Hey there,", style: TextStyles.Secondary),
+                  const Text("Create an account", style: TextStyles.Primary),
                   SizedBox(height: gap * 2),
                   LoginTextInput(
                     hintText: 'Name',
@@ -79,11 +80,11 @@ class _RegisterPageState extends StateMVC<RegisterPage> {
                       Container(
                         width: MediaQuery.sizeOf(context).width * 0.3,
                         height: 2,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           color: lightColor,
                         ),
                       ),
-                      Padding(
+                      const Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(8, 0, 8, 0),
                         child: Text(
                           'Or',
@@ -121,7 +122,7 @@ class _RegisterPageState extends StateMVC<RegisterPage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Text("Already have an account?",
+                        const Text("Already have an account?",
                             style: TextStyles.Main),
                         TextButton(
                             style: TextButton.styleFrom(
@@ -132,7 +133,8 @@ class _RegisterPageState extends StateMVC<RegisterPage> {
                                   MaterialPageRoute(
                                       builder: (context) => LoginPage()));
                             },
-                            child: Text("Login")),
+                            child: const Text("Login",
+                                style: TextStyle(fontFamily: 'Poppins'))),
                       ])
                 ])));
   }

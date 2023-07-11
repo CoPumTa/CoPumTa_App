@@ -6,7 +6,7 @@ import 'package:client/style.dart';
 class NavBar extends StatelessWidget {
   final TabController tabController;
 
-  const NavBar(this.tabController);
+  const NavBar(this.tabController, {super.key});
 
   @override
   Widget build(BuildContext context) {
