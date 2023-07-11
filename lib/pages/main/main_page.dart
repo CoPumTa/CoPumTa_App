@@ -33,15 +33,16 @@ class _MainPageState extends State<MainPage>
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: lightColor,
-      appBar: AppBar(
-        toolbarHeight: 36.0,
-        backgroundColor: mainColor,
-        elevation: 0,
-        title: Text(getToday()),
-        titleTextStyle: TextStyle(
-            color: lightColor, fontWeight: FontWeight.w500, fontSize: 16),
-        centerTitle: true,
-      ),
+      // appBar:
+      // AppBar(
+      //   toolbarHeight: 36.0,
+      //   backgroundColor: mainColor,
+      //   elevation: 0,
+      //   title: Text(getToday()),
+      //   titleTextStyle: TextStyle(
+      //       color: lightColor, fontWeight: FontWeight.w500, fontSize: 16),
+      //   centerTitle: true,
+      // ),
       body: TabBarView(
           physics: const NeverScrollableScrollPhysics(),
           controller: _tabController,

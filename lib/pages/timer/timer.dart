@@ -1,25 +1,119 @@
 import 'package:client/style.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
+import 'package:stop_watch_timer/stop_watch_timer.dart';
 
-class Timer extends StatelessWidget {
+class Timer extends StatefulWidget {
+  final StopWatchTimer todayStopWatch;
+
+  const Timer({super.key, required this.todayStopWatch});
+  @override
+  State<Timer> createState() => _TimerState();
+}
+
+class _TimerState extends State<Timer> {
+  final currentStopWatch = StopWatchTimer();
+
+  @override
+  void initState() {
+    widget.todayStopWatch.onStartTimer();
+    currentStopWatch.onStartTimer();
+    super.initState();
+  }
+
+  @override
+  void dispose() async {
+    super.dispose();
+    widget.todayStopWatch.onStopTimer();
+    await currentStopWatch.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: subColor,
-        elevation: 0,
-        toolbarHeight: 50,
-        leading: IconButton(
-          icon: Icon(Icons.menu),
-          onPressed: () => Fluttertoast.showToast(
-            msg: "미구현 기능입니다.",
+        backgroundColor: darkColor,
+        body: Center(
+            child:
+                Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+          SizedBox(height: 72),
+          Text(
+            "Current Flow Time",
+            style: TextStyles.lightMain,
           ),
-        ),
-        title: Text(DateFormat("M.d").format(DateTime.now())),
-        centerTitle: true,
-      ),
-    );
+          StreamBuilder<int>(
+              stream: currentStopWatch.rawTime,
+              initialData: currentStopWatch.rawTime.value,
+              builder: (context, snap) {
+                final value = snap.data!;
+                final displayTime =
+                    StopWatchTimer.getDisplayTime(value, milliSecond: false);
+                return Padding(
+                  padding: const EdgeInsets.all(8),
+                  child: Text(
+                    displayTime,
+                    style: TextStyle(
+                        fontSize: 58,
+                        fontWeight: FontWeight.w700,
+                        color: lightColor),
+                  ),
+                );
+              }),
+          SizedBox(height: 24.0),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                "Today",
+                style: TextStyles.lightTertiary,
+              ),
+              SizedBox(width: 8.0),
+              StreamBuilder<int>(
+                  stream: widget.todayStopWatch.rawTime,
+                  initialData: widget.todayStopWatch.rawTime.value,
+                  builder: (context, snap) {
+                    final value = snap.data!;
+                    final displayTime = StopWatchTimer.getDisplayTime(value,
+                        milliSecond: false);
+                    return Text(
+                      displayTime,
+                      style: TextStyles.lightTertiary,
+                    );
+                  })
+            ],
+          ),
+          SizedBox(height: 4.0),
+          Text(
+            "It\'s not a bug; it\'s an undocumented feature.",
+            style: TextStyles.Hint,
+          ),
+          SizedBox(
+            height: 152,
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Container(
+                    width: 56,
+                    height: 56,
+                    child: ElevatedButton(
+                        onPressed: () {
+                          currentStopWatch.onStopTimer();
+                          widget.todayStopWatch.onStopTimer();
+                          Navigator.pop(context);
+                        },
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: mainColor,
+                            shadowColor: Colors.transparent,
+                            shape: CircleBorder()),
+                        child: const Icon(CupertinoIcons.pause_fill,
+                            size: 32, color: darkColor)))
+              ],
+            ),
+          ),
+        ])));
   }
 }

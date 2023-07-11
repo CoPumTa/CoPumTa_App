@@ -35,8 +35,12 @@ class TextStyles {
       TextStyle(fontSize: 16, color: darkColor, fontWeight: FontWeight.w700);
   static const Tertiary =
       TextStyle(fontSize: 16, color: mainColor, fontWeight: FontWeight.w500);
+  static const lightTertiary =
+      TextStyle(fontSize: 16, color: lightColor, fontWeight: FontWeight.w500);
   static const Main =
       TextStyle(fontSize: 14, color: mainColor, fontWeight: FontWeight.w400);
+  static const lightMain =
+      TextStyle(fontSize: 14, color: lightColor, fontWeight: FontWeight.w400);
   static const MainAccent =
       TextStyle(fontSize: 14, color: blackColor, fontWeight: FontWeight.w400);
   static const Hint =
