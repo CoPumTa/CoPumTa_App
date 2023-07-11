@@ -27,7 +27,10 @@ class LoginModel {
         debugPrint("login 정보 불일치");
       } else {
         Provider.of<AuthProvider>(context, listen: false)
-            .login(response.headers["set-cookie"]!);
+            .login(
+              (response.headers["set-cookie"]?.split(";")[0])!
+              // response.headers["set-cookie"]!
+            );
       }
     } catch (error) {
       debugPrint("login 에러: $error");
