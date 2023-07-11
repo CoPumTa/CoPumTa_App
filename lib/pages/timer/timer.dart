@@ -40,7 +40,6 @@ class _TimerState extends StateMVC<Timer> {
 
   @override
   void dispose() {
-    HomeModel.flowTime = _previousElapsedTime;
     disposeTimers();
     super.dispose();
   }

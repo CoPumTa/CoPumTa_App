@@ -25,11 +25,11 @@ class _SmallTimerState extends State<SmallTimer> {
   void _loadElapsedTime() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     // setState(() {
-    HomeModel.flowTime = prefs.getInt('elapsedTime') ?? 0;
+    int prefValue = prefs.getInt('elapsedTime') ?? 0;
 
-    debugPrint('loaded _previousElapsedTime: ${HomeModel.flowTime}');
+    debugPrint('loaded _previousElapsedTime: $prefValue');
     setState(() {
-      _previousElapsedTime = HomeModel.flowTime;
+      _previousElapsedTime = prefValue;
     });
     // homePageController.todayStopWatch
     //     .setPresetTime(mSec: _previousElapsedTime);
