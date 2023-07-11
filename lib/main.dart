@@ -1,9 +1,9 @@
+import 'package:client/data/providers/auth_provider.dart';
 import 'package:client/pages/login/login_page.dart';
 import 'package:client/pages/main/main_page.dart';
 import 'package:flutter/material.dart';
 import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
 import 'package:provider/provider.dart';
-import 'data/providers/auth_provider.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
