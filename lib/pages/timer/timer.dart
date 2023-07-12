@@ -1,12 +1,16 @@
+import 'dart:convert';
 import 'dart:math';
 
 import 'package:client/data/constant.dart';
+import 'package:client/data/models/user_info.dart';
 import 'package:client/style.dart';
+import 'package:client/utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
+import 'package:http/http.dart' as http;
 
 class Timer extends StatefulWidget {
   final int accumulatedTime;
@@ -35,8 +39,6 @@ class TimerState extends StateMVC<Timer> {
     disposeTimers();
     super.dispose();
   }
-
-  // void async
 
   void disposeTimers() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -130,9 +132,18 @@ class TimerState extends StateMVC<Timer> {
                             width: 56,
                             height: 56,
                             child: ElevatedButton(
-                                onPressed: () {
+                                onPressed: () async {
                                   currentStopWatch.onStopTimer();
                                   todayStopWatch.onStopTimer();
+                                  SharedPreferences prefs =
+                                      await SharedPreferences.getInstance();
+
+                                  postTodayTime(
+                                      StopWatchTimer.getDisplayTime(
+                                          _previousElapsedTime,
+                                          milliSecond: false),
+                                      await prefs.getString('session') ?? "");
+
                                   Navigator.pop(context, _previousElapsedTime);
                                 },
                                 style: ElevatedButton.styleFrom(
@@ -145,5 +156,20 @@ class TimerState extends StateMVC<Timer> {
                     ),
                   ),
                 ]))));
+  }
+}
+
+void postTodayTime(String todaysTime, String session) async {
+  final request = Uri.parse("${BASE_URL}user/postInfo");
+  try {
+    final response = await http.post(request,
+        headers: {"Content-Type": "application/json", "Cookie": session},
+        body: json.encode(
+            {"userId": UserInfo.user?.userId ?? 0, "todaysTime": todaysTime}));
+    if (response.statusCode >= 400) {
+      debugPrint("user/postInfo 실패");
+    }
+  } catch (error) {
+    debugPrint("user/postInfo error: $error");
   }
 }

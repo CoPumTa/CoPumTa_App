@@ -4,6 +4,7 @@ import 'package:client/utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:stop_watch_timer/stop_watch_timer.dart';
 
 class SmallTimer extends StatefulWidget {
   @override
@@ -52,7 +53,8 @@ class _SmallTimerState extends State<SmallTimer> {
                 Padding(
                   padding: const EdgeInsets.all(8),
                   child: Text(
-                    formatMilliseconds(_previousElapsedTime),
+                    StopWatchTimer.getDisplayTime(_previousElapsedTime,
+                        milliSecond: false),
                     style: const TextStyle(
                         fontSize: 54,
                         fontWeight: FontWeight.w700,
@@ -75,7 +77,6 @@ class _SmallTimerState extends State<SmallTimer> {
                               _previousElapsedTime = value ?? 0;
                             });
                           });
-                          debugPrint("result is... ${result}");
                           // await _loadElapsedTime();
                         },
                         style: ElevatedButton.styleFrom(

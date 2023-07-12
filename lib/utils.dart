@@ -7,20 +7,14 @@ String getToday() {
   return strToday;
 }
 
-String formatMilliseconds(int milliseconds) {
-  // 총 밀리초를 시, 분, 초로 변환
-  int seconds = (milliseconds / 1000).truncate();
-  int minutes = (seconds / 60).truncate();
-  int hours = (minutes / 60).truncate();
+int timeToMilliseconds(String time) {
+  List<String> parts = time.split(':');
 
-  // 시, 분, 초를 각각 계산
-  seconds = seconds % 60;
-  minutes = minutes % 60;
+  int hours = int.parse(parts[0]);
+  int minutes = int.parse(parts[1]);
+  int seconds = int.parse(parts[2]);
 
-  // HH:MM:SS 형식의 문자열로 변환
-  String hoursStr = (hours % 24).toString().padLeft(2, '0');
-  String minutesStr = minutes.toString().padLeft(2, '0');
-  String secondsStr = seconds.toString().padLeft(2, '0');
+  int totalMilliseconds = hours * 3600000 + minutes * 60000 + seconds * 1000;
 
-  return '$hoursStr:$minutesStr:$secondsStr';
+  return totalMilliseconds;
 }

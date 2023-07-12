@@ -1,4 +1,5 @@
 import 'package:client/data/models/top_friend.dart';
+import 'package:client/data/models/user_info.dart';
 import 'package:client/pages/home/home_page_controller.dart';
 import 'package:client/pages/home/medal.dart';
 import 'package:client/pages/home/small_timer.dart';
@@ -82,9 +83,19 @@ class _HomePageState extends StateMVC<HomePage> {
                     shadowColor: Colors.transparent,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10.0)),
-                    child: SvgPicture.network(
-                        // TODO: 유저 정보 받아와서 ID 변경해야함
-                        "https://ghchart.rshah.org/coitloz88")))),
+                    child: (UserInfo.user != null &&
+                            UserInfo.user!.githubId != null &&
+                            UserInfo.user!.githubId!.isNotEmpty)
+                        ? SvgPicture.network(
+                            "https://ghchart.rshah.org/${UserInfo.user!.githubId}")
+                        : SizedBox(
+                            height: 100,
+                            child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text("github id를 연동해주세요.",
+                                      style: KorTextStyles.Main)
+                                ]))))),
       ),
     ]);
   }
