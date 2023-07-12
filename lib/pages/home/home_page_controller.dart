@@ -1,5 +1,4 @@
 import 'package:client/data/models/home_model.dart';
-import 'package:client/data/models/top_friend.dart';
 import 'package:client/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
@@ -20,6 +19,10 @@ class HomePageController extends ControllerMVC {
     return _homeModel.topFriends;
   }
 
+  List<FriendInfo> getAllFriends() {
+    return _homeModel.friends;
+  }
+
   Future<void> fetchTopFriends() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? cookie = prefs.getString("session");
@@ -31,14 +34,11 @@ class HomePageController extends ControllerMVC {
     }
 
     List<FriendInfo> friends = await getFriends(cookie);
+    _homeModel.friends = friends;
     friends.sort((a, b) => (b.todaysTime.compareTo(a.todaysTime)));
 
     if (friends.length < 1) {
-      _homeModel.topFriends = [
-        FriendInfo(0, "dummy1", "00:00:00", false),
-        FriendInfo(0, "dummy2", "00:00:00", false),
-        FriendInfo(0, "dummy3", "00:00:00", false)
-      ];
+      _homeModel.topFriends = [];
     }
     _homeModel.topFriends = List.generate(
         friends.length > 3 ? 3 : friends.length, (index) => friends[index]);
