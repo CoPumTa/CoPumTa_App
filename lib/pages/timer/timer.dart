@@ -4,7 +4,6 @@ import 'dart:math';
 import 'package:client/data/constant.dart';
 import 'package:client/data/models/user_info.dart';
 import 'package:client/style.dart';
-import 'package:client/utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';

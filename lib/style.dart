@@ -50,6 +50,11 @@ class TextStyles {
 }
 
 class KorTextStyles {
+  static const smallMain = TextStyle(
+      fontSize: 18,
+      color: mainColor,
+      fontWeight: FontWeight.w400,
+      fontFamily: 'D2Coding');
   static const Main = TextStyle(
       fontSize: 22,
       color: mainColor,

@@ -42,31 +42,27 @@ class FriendInfo {
 Future<List<FriendInfo>> getFriends(String session) async {
   final request = Uri.parse("${BASE_URL}user/getFriends");
   final List<FriendInfo> ans = [];
-  
+
   try {
-    final response = await http.get(request,
-      headers: {"Content-Type": "application/json", "Cookie": session},);
-      if (response.statusCode == 401) {
-        debugPrint("failed to get Challenges");
-      } else {
-        // LoginModel.cookie = response.headers["set-cookie"]!;
-        // Provider.of<AuthProvider>(context, listen: false).login();
-        final List<dynamic> data = json.decode(json.decode(response.body));
-        debugPrint(data.toString());
-        data.forEach((userData) {
-          ans.add(FriendInfo(
-            userData["userId"],
-            userData["userName"],
-            userData["todaysTime"],
-            userData["isFlowing"]
-          ));
-        });
-        debugPrint("friends list looks");
-        ans.forEach((e) => 
-          debugPrint(e.toString())
-        );
-        debugPrint("response body is ${data.toString()}");
-      }
+    final response = await http.get(
+      request,
+      headers: {"Content-Type": "application/json", "Cookie": session},
+    );
+    if (response.statusCode == 401) {
+      debugPrint("failed to get Challenges");
+    } else {
+      // LoginModel.cookie = response.headers["set-cookie"]!;
+      // Provider.of<AuthProvider>(context, listen: false).login();
+      final List<dynamic> data = json.decode(json.decode(response.body));
+      debugPrint(data.toString());
+      data.forEach((userData) {
+        ans.add(FriendInfo(userData["userId"], userData["userName"],
+            userData["todaysTime"], userData["isFlowing"]));
+      });
+      debugPrint("friends list looks");
+      ans.forEach((e) => debugPrint(e.toString()));
+      debugPrint("response body is ${data.toString()}");
+    }
   } catch (error) {
     debugPrint("/challenge/participating 에러: $error");
   }
