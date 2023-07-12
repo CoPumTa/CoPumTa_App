@@ -1,3 +1,5 @@
+import 'dart:math';
+import 'package:client/data/constant.dart';
 import 'package:client/pages/new_challenge/new_challenge_page.dart';
 import 'package:client/pages/challenge/challenge_page_controller.dart';
 import 'package:client/style.dart';
@@ -17,6 +19,8 @@ class _ChallengePageState extends State<ChallengePage> {
   final _challengePageController = ChallengePageController();
   final _prefs = SharedPreferences.getInstance();
   final _dateFormat = DateFormat("yyyy-MM-dd");
+  final int quoteIdx = Random().nextInt(QUOTES.length);
+
 
   @override
   void initState() {
@@ -32,14 +36,69 @@ class _ChallengePageState extends State<ChallengePage> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: double.infinity,
-      child: ListView.builder(
-        itemCount: _challengePageController.challengeList.length+1,
-        itemBuilder: (BuildContext context, int index) {
-          return makeCard(index);
-        },
-      )
+    return Scaffold(
+      appBar: AppBar(
+        toolbarHeight: 126,
+        elevation: 0,
+        backgroundColor: mainColor,
+        title: Container(
+          height: 126,
+          width: double.infinity,
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Padding(padding: EdgeInsets.only(left: 10),),
+              Text(
+                "${_challengePageController.challengeList.length}",
+                style: TextStyle(fontSize: 90,),),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(10, 20, 0, 0),
+                      child: Text("challenges!"),),
+                    Expanded(
+                      child: SizedBox(
+                        child: Align(
+                          alignment: Alignment.bottomRight,
+                          child: Padding(
+                            padding: EdgeInsets.fromLTRB(0, 0, 10, 10),
+                            child: Wrap(
+                              alignment: WrapAlignment.center,
+                              crossAxisAlignment: WrapCrossAlignment.center,
+                              runAlignment: WrapAlignment.center,
+                              children: [
+                                Text(
+                                  QUOTES[quoteIdx],
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                  ),
+                                  textAlign: TextAlign.right
+                                ),
+                              ]
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        )
+      ),
+      backgroundColor: subColor,
+      body: Padding(
+        padding: EdgeInsets.only(top: 4),
+        child: ListView.builder(
+          itemCount: _challengePageController.challengeList.length+1,
+          itemBuilder: (BuildContext context, int index) {
+            return makeCard(index);
+          },
+        )
+      ),
     );
   }
 
