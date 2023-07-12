@@ -1,11 +1,10 @@
-import 'package:client/data/providers/auth_provider.dart';
-import 'package:client/data/models/challenge_list_item_model.dart';
+import 'package:client/pages/new_challenge/new_challenge_page.dart';
 import 'package:client/pages/challenge/challenge_page_controller.dart';
 import 'package:client/style.dart';
+import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:provider/provider.dart';
+import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 
@@ -17,6 +16,7 @@ class ChallengePage extends StatefulWidget {
 class _ChallengePageState extends State<ChallengePage> {
   final _challengePageController = ChallengePageController();
   final _prefs = SharedPreferences.getInstance();
+  final _dateFormat = DateFormat("yyyy-MM-dd");
 
   @override
   void initState() {
@@ -33,25 +33,65 @@ class _ChallengePageState extends State<ChallengePage> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-        height: double.infinity,
-        child: ListView.builder(
-          itemCount: _challengePageController.challengeList.length,
-          itemBuilder: (BuildContext context, int index) {
-            return makeCard(index);
-          },
-        ));
+      height: double.infinity,
+      child: ListView.builder(
+        itemCount: _challengePageController.challengeList.length+1,
+        itemBuilder: (BuildContext context, int index) {
+          return makeCard(index);
+        },
+      )
+    );
   }
 
   Card makeCard(index) {
-    return Card(
-      color: lightColor,
-      elevation: 2.0,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20.0), //<-- SEE HERE
-      ),
-      margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
-      child: SizedBox(height: 120, child: makeListTile(index)),
-    );
+    if(index != _challengePageController.challengeList.length){
+      return Card(
+        color: lightColor,
+        elevation: 2.0,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20.0), //<-- SEE HERE
+        ),
+        margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
+        child: SizedBox(
+          height: 120,
+          child: makeListTile(index)
+        ),
+      );
+    } else {
+      return Card(
+        color: subColor,
+        elevation: 0,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20.0), //<-- SEE HERE
+        ),
+        margin: EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
+        child: DottedBorder(
+          borderType: BorderType.RRect,
+          color: lightColor,
+          radius: Radius.circular(20),
+          strokeWidth: 3,
+          dashPattern: [10, 6],
+          child: GestureDetector(
+            onTap:() async {
+              debugPrint("tap detected");
+              dynamic result = await Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => newChallengePage(),
+                )
+              );
+              debugPrint("return to ChallengeList");
+            },
+            child: const SizedBox(
+              height: 110,
+              child: Center(
+                child: Icon(Icons.control_point, color: lightColor, size: 50)
+              ),
+            ),
+          )
+        ),
+      );
+    }
   }
 
   Row makeListTile(index) {
@@ -64,26 +104,41 @@ class _ChallengePageState extends State<ChallengePage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
-                    width: double.infinity,
-                    child: Row(
-                      children: [
+                  width: double.infinity,
+                  child: Row(
+                    children: [
+                      Text(
+                        _challengePageController.challengeList[index].title,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(fontSize: 30),
+                      ),
+                    ],
+                  )
+                ),
+                Spacer(),
+                SizedBox(
+                  width: double.infinity,
+                  child: Row(
+                    children: [
+                      Column(
+                        children: [
                         Text(
-                          _challengePageController.challengeList[index].title,
-                          style: TextStyle(fontSize: 40),
+                          "from ${_dateFormat.format(_challengePageController.challengeList[index].startDay)}",
+                          style: TextStyle(fontSize: 10),
                         ),
-                        Spacer(),
                         Text(
-                          "Challenge and get\n ${_challengePageController.challengeList[index].prize} points!",
-                          textAlign: TextAlign.right,
-                        )
-                      ],
-                    )),
-                Text(
-                  _challengePageController.challengeList[index].startDay
-                          .toString() ??
-                      "no subTitle",
-                  style: TextStyle(fontSize: 20),
-                )
+                          "to      ${_dateFormat.format(_challengePageController.challengeList[index].endDay)}",
+                          style: TextStyle(fontSize: 10),
+                        )],
+                      ),
+                      Spacer(),
+                      Text(
+                        "Challenge and get\n ${_challengePageController.challengeList[index].prize} points!",
+                        textAlign: TextAlign.right,
+                      )
+                    ]
+                  )
+                ),
               ],
             ),
           ),

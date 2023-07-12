@@ -15,7 +15,5 @@ class ChallengeListItemModel {
     this.endDay,
     this.prize,
     this.userId,
-  );
-
-  
+  ); 
 }
