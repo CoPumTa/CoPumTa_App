@@ -38,6 +38,7 @@ class AuthProvider with ChangeNotifier {
         debugPrint("서버에서 받아온 todays time: ${UserInfo.user?.todaysTime}");
         prefs.setInt('elapsedTime',
             timeToMilliseconds(UserInfo.user?.todaysTime ?? "00:00:00"));
+        _postFlow(cookie, true);
       } else {
         debugPrint("user/getInfo 실패");
       }
@@ -49,11 +50,29 @@ class AuthProvider with ChangeNotifier {
   }
 
   void logout() async {
+    _postFlow(cookie!, false);
     cookie = null;
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.remove("session");
     prefs.remove("userInfo");
     UserInfo.user = null;
     notifyListeners(); // 상태 변경을 알립니다.
+  }
+
+  void _postFlow(String cookie, bool isFlow) async {
+    final request = Uri.parse("${BASE_URL}user/postInfo");
+
+    try {
+      final response = await http.post(request,
+          headers: {"Content-Type": "application/json", "Cookie": cookie},
+          body:
+              json.encode({"isFlow": isFlow, "userId": UserInfo.user!.userId}));
+
+      if (response.statusCode >= 400) {
+        debugPrint("user/postInfo 실패");
+      }
+    } catch (error) {
+      debugPrint("user/postInfo 에러: $error");
+    }
   }
 }
