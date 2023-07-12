@@ -82,6 +82,67 @@ class _HomePageState extends StateMVC<HomePage> {
                     ))),
           ),
 
+          // Flowing Friends
+          Card(
+            color: lightColor,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0)),
+            margin: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 4),
+            child: Padding(
+                padding: const EdgeInsets.fromLTRB(16.0, 12.0, 16.0, 12.0),
+                child: WidgetWithTopLeftHeading(
+                    heading: "Flowing Friends!",
+                    widget: homePageController.getAllFriends().length > 0
+                        ? SizedBox(
+                            width: double.infinity,
+                            child: Wrap(
+                              direction: Axis.horizontal,
+                              children: friendsWidget,
+                            ),
+                          )
+                        : const SizedBox(
+                            height: 100,
+                            child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text("친구가 없습니다.", style: KorTextStyles.Main)
+                                ])))),
+          ),
+
+          Card(
+              color: lightColor,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0)),
+              margin: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+              child: Padding(
+                  padding: const EdgeInsets.fromLTRB(16.0, 12.0, 16.0, 16.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Flexible(
+                          child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                  shadowColor: Colors.transparent,
+                                  backgroundColor: Colors.transparent),
+                              onPressed: () {},
+                              child:
+                                  Text("Add Friends", style: TextStyles.Main)),
+                          flex: 1,
+                          fit: FlexFit.tight),
+                      Container(width: 1, height: 28, color: mainColor),
+                      Flexible(
+                          child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                  shadowColor: Colors.transparent,
+                                  backgroundColor: Colors.transparent),
+                              onPressed: () {},
+                              child: Text("Accept Requests",
+                                  style: TextStyles.Main)),
+                          flex: 1,
+                          fit: FlexFit.tight)
+                    ],
+                  ))),
+
           // github contributions
           Card(
               color: lightColor,
@@ -115,33 +176,6 @@ class _HomePageState extends StateMVC<HomePage> {
                                         Text("github id를 연동해주세요.",
                                             style: KorTextStyles.Main)
                                       ])))))),
-
-          // Flowing Friends
-          Card(
-            color: lightColor,
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10.0)),
-            margin: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 4),
-            child: Padding(
-                padding: const EdgeInsets.fromLTRB(16.0, 12.0, 16.0, 12.0),
-                child: WidgetWithTopLeftHeading(
-                    heading: "Flowing Friends!",
-                    widget: homePageController.getAllFriends().length > 0
-                        ? SizedBox(
-                            width: double.infinity,
-                            child: Wrap(
-                              direction: Axis.horizontal,
-                              children: friendsWidget,
-                            ),
-                          )
-                        : const SizedBox(
-                            height: 100,
-                            child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text("친구가 없습니다.", style: KorTextStyles.Main)
-                                ])))),
-          ),
         ])),
       ),
     ]);

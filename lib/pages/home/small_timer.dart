@@ -34,12 +34,13 @@ class _SmallTimerState extends State<SmallTimer> {
   Widget build(BuildContext context) {
     // Timer
     return Container(
-        height: 150,
+        height: 160,
         color: mainColor,
         child: Padding(
             padding: const EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 0),
             child:
                 Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+              const SizedBox(height: 22),
               const Row(
                 children: [
                   SizedBox(

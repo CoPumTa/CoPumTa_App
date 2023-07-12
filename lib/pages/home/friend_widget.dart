@@ -14,14 +14,14 @@ class FriendWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-        width: 96,
-        height: 110,
+        width: 86,
+        height: 90,
         child: Center(
             child:
                 Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           Image.asset(imageSourceLink,
-              width: 56,
-              height: 56,
+              width: 50,
+              height: 50,
               opacity: (friend.isFlowing
                   ? const AlwaysStoppedAnimation<double>(1.0)
                   : const AlwaysStoppedAnimation<double>(0.25))),
