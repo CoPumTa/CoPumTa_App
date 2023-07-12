@@ -22,16 +22,12 @@ class LoginModel {
       final response = await http.post(request,
           headers: {"Content-Type": "application/json"},
           body: json.encode({"email": email, "password": password}));
-      debugPrint("로그인 응답 쿠키 헤더: ${response.headers["set-cookie"]}");
       if (response.statusCode == 401 ||
           response.headers["set-cookie"] == null) {
         debugPrint("login 정보 불일치");
       } else {
         Provider.of<AuthProvider>(context, listen: false)
-            .login(
-              (response.headers["set-cookie"]?.split(";")[0])!
-              // response.headers["set-cookie"]!
-            );
+            .login((response.headers["set-cookie"]?.split(";")[0])!);
       }
     } catch (error) {
       debugPrint("login 에러: $error");

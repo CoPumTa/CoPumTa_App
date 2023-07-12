@@ -5,13 +5,11 @@ import 'package:client/style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:intl/intl_browser.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 
 class ChallengePage extends StatefulWidget {
-
   @override
   State<ChallengePage> createState() => _ChallengePageState();
 }
@@ -25,9 +23,9 @@ class _ChallengePageState extends State<ChallengePage> {
     // TODO: implement initState
     _prefs.then((prefs) {
       final String session = prefs.getString("session") ?? "";
-      _challengePageController.getChallengeList(session)
-        .then((value) => setState(() {}));
-      
+      _challengePageController
+          .getChallengeList(session)
+          .then((value) => setState(() {}));
     });
     super.initState();
   }
@@ -35,14 +33,13 @@ class _ChallengePageState extends State<ChallengePage> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: double.infinity,
-      child: ListView.builder(
-        itemCount: _challengePageController.challengeList.length,
-        itemBuilder: (BuildContext context, int index) {
-          return makeCard(index);
-        },
-      )
-    );
+        height: double.infinity,
+        child: ListView.builder(
+          itemCount: _challengePageController.challengeList.length,
+          itemBuilder: (BuildContext context, int index) {
+            return makeCard(index);
+          },
+        ));
   }
 
   Card makeCard(index) {
@@ -53,12 +50,10 @@ class _ChallengePageState extends State<ChallengePage> {
         borderRadius: BorderRadius.circular(20.0), //<-- SEE HERE
       ),
       margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
-      child: SizedBox(
-        height: 120,
-        child: makeListTile(index)
-      ),
+      child: SizedBox(height: 120, child: makeListTile(index)),
     );
   }
+
   Row makeListTile(index) {
     return Row(
       children: [
@@ -69,23 +64,24 @@ class _ChallengePageState extends State<ChallengePage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
-                  width: double.infinity,
-                  child: Row(
-                    children: [
-                      Text(
-                        _challengePageController.challengeList[index].title,
-                        style: TextStyle(fontSize: 40),
-                      ),
-                      Spacer(),
-                      Text(
-                        "Challenge and get\n ${_challengePageController.challengeList[index].prize} points!",
-                        textAlign: TextAlign.right,
-                      )
-                    ],
-                  )
-                ),
+                    width: double.infinity,
+                    child: Row(
+                      children: [
+                        Text(
+                          _challengePageController.challengeList[index].title,
+                          style: TextStyle(fontSize: 40),
+                        ),
+                        Spacer(),
+                        Text(
+                          "Challenge and get\n ${_challengePageController.challengeList[index].prize} points!",
+                          textAlign: TextAlign.right,
+                        )
+                      ],
+                    )),
                 Text(
-                  _challengePageController.challengeList[index].startDay.toString() ?? "no subTitle",
+                  _challengePageController.challengeList[index].startDay
+                          .toString() ??
+                      "no subTitle",
                   style: TextStyle(fontSize: 20),
                 )
               ],
@@ -97,14 +93,13 @@ class _ChallengePageState extends State<ChallengePage> {
           child: Padding(
             padding: EdgeInsets.fromLTRB(0, 15, 10, 15),
             child: Container(
-              height: double.infinity,
-              width: 90,
-              // decoration: const BoxDecoration(
-              //   border: Border(
-              //   left: BorderSide(width: 2.0, color: darkColor),
-              //   right: BorderSide(width: 2.0, color: darkColor))),
-              child: progressGraph(50)
-            ),
+                height: double.infinity,
+                width: 90,
+                // decoration: const BoxDecoration(
+                //   border: Border(
+                //   left: BorderSide(width: 2.0, color: darkColor),
+                //   right: BorderSide(width: 2.0, color: darkColor))),
+                child: progressGraph(50)),
           ),
         )
       ],
@@ -112,10 +107,10 @@ class _ChallengePageState extends State<ChallengePage> {
   }
 
   SfRadialGauge progressGraph(value) {
-      return SfRadialGauge(
-        enableLoadingAnimation: true,
-        axes: <RadialAxis>[
-          RadialAxis(
+    return SfRadialGauge(
+      enableLoadingAnimation: true,
+      axes: <RadialAxis>[
+        RadialAxis(
             minimum: 0,
             maximum: 100,
             showLabels: false,
@@ -139,17 +134,15 @@ class _ChallengePageState extends State<ChallengePage> {
             ],
             annotations: <GaugeAnnotation>[
               GaugeAnnotation(
-                verticalAlignment: GaugeAlignment.center,
-                positionFactor: 0.5,
-                angle: 90,
-                widget: Text(
-                  50.toStringAsFixed(0) + '%',
-                  style: TextStyle(fontSize: 11),
-                )
-              )
-            ]
-          )
-        ],
-      );
-    }
+                  verticalAlignment: GaugeAlignment.center,
+                  positionFactor: 0.5,
+                  angle: 90,
+                  widget: Text(
+                    50.toStringAsFixed(0) + '%',
+                    style: TextStyle(fontSize: 11),
+                  ))
+            ])
+      ],
+    );
+  }
 }
