@@ -16,7 +16,7 @@ class LoginModel {
   set password(String password) => (_password = password);
 
   void login(context) async {
-    final request = Uri.parse("${BASE_URL}auth/login/");
+    final request = Uri.parse("${BASE_URL}auth/login");
 
     try {
       final response = await http.post(request,
