@@ -34,16 +34,16 @@ class NavBar extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         tabs: const [
           GButton(
-            icon: Icons.home,
-            text: 'Home',
+            icon: Icons.timer,
+            text: 'timer',
           ),
           GButton(
-            icon: Icons.headphones,
-            text: 'Likes',
+            icon: Icons.trending_up,
+            text: 'challenge',
           ),
           GButton(
-            icon: Icons.search,
-            text: 'Search',
+            icon: Icons.store,
+            text: 'store',
           ),
         ]);
   }
