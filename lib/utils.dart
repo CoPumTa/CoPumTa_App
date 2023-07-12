@@ -23,13 +23,13 @@ int timeToMilliseconds(String time) {
   return totalMilliseconds;
 }
 
-class UserInfo {
+class FriendInfo {
   final int userId;
   final String userName;
   final String todaysTime;
   final bool isFlowing;
 
-  UserInfo(this.userId, this.userName, this.todaysTime, this.isFlowing);
+  FriendInfo(this.userId, this.userName, this.todaysTime, this.isFlowing);
 
   @override
   String toString() {
@@ -39,9 +39,9 @@ class UserInfo {
   }
 }
 
-Future<List<UserInfo>> getFriends(String session) async {
+Future<List<FriendInfo>> getFriends(String session) async {
   final request = Uri.parse("${BASE_URL}user/getFriends");
-  final List<UserInfo> ans = [];
+  final List<FriendInfo> ans = [];
   
   try {
     final response = await http.get(request,
@@ -54,7 +54,7 @@ Future<List<UserInfo>> getFriends(String session) async {
         final List<dynamic> data = json.decode(json.decode(response.body));
         debugPrint(data.toString());
         data.forEach((userData) {
-          ans.add(UserInfo(
+          ans.add(FriendInfo(
             userData["userId"],
             userData["userName"],
             userData["todaysTime"],

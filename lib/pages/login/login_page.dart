@@ -117,7 +117,7 @@ class LoginPageState extends StateMVC<LoginPage> {
                                       builder: (context) => RegisterPage()));
                             },
                             child: const Text("Register",
-                                style: TextStyle(fontFamily: 'Poppins'))),
+                                style: TextStyle(fontFamily: 'Poppins', fontSize: 17))),
                       ])
                 ])));
   }

@@ -19,7 +19,7 @@ class newChallengePage extends StatefulWidget {
 class _newChallengePageState extends State<newChallengePage> {
   final double gap = 8.0;
   final _dateFormat = DateFormat("yyyy-MM-dd");
-  List<MultiSelectItem<UserInfo>> _items = [];
+  List<MultiSelectItem<FriendInfo>> _items = [];
   List<dynamic> _selectedItems = [];
   final _prefs = SharedPreferences.getInstance();
   final _titleController = TextEditingController();
@@ -37,7 +37,7 @@ class _newChallengePageState extends State<newChallengePage> {
         setState(() {
           _items.clear();
           _items.addAll(userInfos.map((userInfo) =>
-            MultiSelectItem<UserInfo>(userInfo, userInfo.userName)
+            MultiSelectItem<FriendInfo>(userInfo, userInfo.userName)
           ).toList());
         });
       });
