@@ -65,6 +65,84 @@ class SettingPage extends StatelessWidget {
       body: Container(
         color: subColor,
         height: double.infinity,
+        child: Column(
+          children: [
+            Flexible(
+              flex: 1,
+              child: Container(
+                child: Row(
+                  children: [
+                    Flexible(
+                      child: Container(
+                        color: lightColor,
+                        child: Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(Icons.storefront, size: 100,color: darkColor,),
+                              Text("Point Store", style: TextStyle(color: darkColor, fontSize: 20),),
+                            ],
+                          )
+                        ),
+                      )
+                    ),
+                    Flexible(
+                      child: Container(
+                        color: subColor,
+                        child: Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(Icons.settings, size: 100,color: darkColor,),
+                              Text("Settings", style: TextStyle(color: darkColor, fontSize: 20),),
+                            ],
+                          )
+                        ),
+                      )
+                    ),
+                  ]
+                ),
+              )
+            ),
+            Flexible(
+              flex: 1,
+              child: Container(
+                child: Row(
+                  children: [
+                    Flexible(
+                      child: Container(
+                        color: mainColor,
+                        child: Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(Icons.help, size: 100,color: lightColor,),
+                              Text("Help", style: TextStyle(color: lightColor, fontSize: 20),),
+                            ],
+                          )
+                        ),
+                      ),
+                    ),
+                    Flexible(
+                      child: Container(
+                        color: darkColor,
+                        child: Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(Icons.coffee, size: 100,color: lightColor,),
+                              Text("Buy me a coffee!", style: TextStyle(color: lightColor, fontSize: 20),),
+                            ],
+                          )
+                        ),
+                      ),
+                    ),
+                  ]
+                ),
+              )
+            )
+          ],
+        ),
       ),
     );
   }
