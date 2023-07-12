@@ -99,7 +99,7 @@ class _ChallengePageState extends State<ChallengePage> {
       children: [
         Expanded(
           child: Padding(
-            padding: EdgeInsets.fromLTRB(15, 5, 8, 5),
+            padding: EdgeInsets.fromLTRB(15, 16, 8, 5),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -110,12 +110,12 @@ class _ChallengePageState extends State<ChallengePage> {
                       Text(
                         _challengePageController.challengeList[index].title,
                         overflow: TextOverflow.ellipsis,
-                        style: TextStyle(fontSize: 30),
+                        style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                       ),
                     ],
                   )
                 ),
-                Spacer(),
+                // Spacer(),
                 SizedBox(
                   width: double.infinity,
                   child: Row(
@@ -124,17 +124,18 @@ class _ChallengePageState extends State<ChallengePage> {
                         children: [
                         Text(
                           "from ${_dateFormat.format(_challengePageController.challengeList[index].startDay)}",
-                          style: TextStyle(fontSize: 10),
+                          style: TextStyle(fontSize: 12, fontWeight: FontWeight.w100),
                         ),
                         Text(
                           "to      ${_dateFormat.format(_challengePageController.challengeList[index].endDay)}",
-                          style: TextStyle(fontSize: 10),
+                          style: TextStyle(fontSize: 12, fontWeight: FontWeight.w100),
                         )],
                       ),
                       Spacer(),
                       Text(
                         "Challenge and get\n ${_challengePageController.challengeList[index].prize} points!",
                         textAlign: TextAlign.right,
+                        style: TextStyle(fontSize: 12),
                       )
                     ]
                   )
@@ -154,14 +155,23 @@ class _ChallengePageState extends State<ChallengePage> {
                 //   border: Border(
                 //   left: BorderSide(width: 2.0, color: darkColor),
                 //   right: BorderSide(width: 2.0, color: darkColor))),
-                child: progressGraph(50)),
+                child: progressGraph(index)),
           ),
         )
       ],
     );
   }
 
-  SfRadialGauge progressGraph(value) {
+  SfRadialGauge progressGraph(int index) {
+    final startDay = _challengePageController.challengeList[index].startDay;
+    final endDay = _challengePageController.challengeList[index].endDay;
+    final today = DateTime.now();
+    debugPrint(today.difference(startDay).inDays.toString());
+    debugPrint(endDay.difference(startDay).inDays.toString());
+    double value = today.difference(startDay).inDays/endDay.difference(startDay).inDays;
+    value = value*100;
+    debugPrint(value.toString());
+
     return SfRadialGauge(
       enableLoadingAnimation: true,
       axes: <RadialAxis>[
@@ -179,7 +189,7 @@ class _ChallengePageState extends State<ChallengePage> {
             ),
             pointers: <GaugePointer>[
               RangePointer(
-                value: 50,
+                value: value,
                 width: 0.15,
                 pointerOffset: 0.1,
                 color: lightColor,
@@ -190,11 +200,11 @@ class _ChallengePageState extends State<ChallengePage> {
             annotations: <GaugeAnnotation>[
               GaugeAnnotation(
                   verticalAlignment: GaugeAlignment.center,
-                  positionFactor: 0.5,
+                  positionFactor: 0.55,
                   angle: 90,
                   widget: Text(
-                    50.toStringAsFixed(0) + '%',
-                    style: TextStyle(fontSize: 11),
+                    value.toStringAsFixed(0) + '%',
+                    style: TextStyle(fontSize: 20, color: lightColor, fontWeight: FontWeight.bold),
                   ))
             ])
       ],
