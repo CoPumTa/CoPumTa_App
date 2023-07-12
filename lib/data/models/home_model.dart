@@ -1,4 +1,5 @@
 import 'package:client/data/models/top_friend.dart';
+import 'package:client/utils.dart';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
 
 /* 오늘의 StopWatchTimer는 모델의 singleton instance에서 가지고 있음.
@@ -7,10 +8,5 @@ currentTimer는 view에서 매번 재생성해주지만.. dispose될 때 이때�
  */
 
 class HomeModel {
-  // StopWatchTimer _todayStopWatch = StopWatchTimer();
-
-  // StopWatchTimer get todayStopWatch => _todayStopWatch;
-  List<TopFriend> _topFriends = [TopFriend(), TopFriend(), TopFriend()];
-
-  List<TopFriend> get topFriends => _topFriends;
+  List<FriendInfo> topFriends = [];
 }

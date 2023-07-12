@@ -4,6 +4,7 @@ import 'package:client/pages/home/home_page_controller.dart';
 import 'package:client/pages/home/medal.dart';
 import 'package:client/pages/home/small_timer.dart';
 import 'package:client/style.dart';
+import 'package:client/utils.dart';
 import 'package:client/widgets/widgetWithTopLeftHeading.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -18,13 +19,19 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends StateMVC<HomePage> {
   double gap = 24.0;
   late HomePageController homePageController;
+  List<String> medalColors = ['gold', 'silver', 'bronze'];
 
   _HomePageState() : super(HomePageController()) {
     homePageController = controller as HomePageController;
   }
 
+  // void getFutureTopFriends(HomePageController controller) async {
+  //   _topFriends = await controller.getTopFriends();
+  // }
+
   @override
   void initState() {
+    homePageController.fetchTopFriends().then((value) => setState(() {}));
     super.initState();
   }
 
@@ -35,7 +42,12 @@ class _HomePageState extends StateMVC<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    List<TopFriend> topFriends = homePageController.topFriends;
+    List<Widget> topFriendsMedals = List.generate(
+        homePageController.getTopFriends().length,
+        (i) => Medal(
+            imageSource: "assets/images/image_${medalColors[i]}_medal.png",
+            userName: homePageController.getTopFriends()[i].userName,
+            flowTime: homePageController.getTopFriends()[i].todaysTime));
     return Column(children: [
       // Timer
       SmallTimer(),
@@ -48,23 +60,11 @@ class _HomePageState extends StateMVC<HomePage> {
         child: Padding(
             padding: const EdgeInsets.fromLTRB(16.0, 12.0, 16.0, 12.0),
             child: WidgetWithTopLeftHeading(
-                heading: "Today's Top 3",
+                heading:
+                    "Today's Top ${homePageController.getTopFriends().length}",
                 widget: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Medal(
-                        imageSource: "assets/images/image_gold_medal.png",
-                        userName: topFriends[0].userName,
-                        flowTime: topFriends[0].flowTime),
-                    Medal(
-                        imageSource: "assets/images/image_silver_medal.png",
-                        userName: topFriends[0].userName,
-                        flowTime: topFriends[0].flowTime),
-                    Medal(
-                        imageSource: "assets/images/image_bronze_medal.png",
-                        userName: topFriends[0].userName,
-                        flowTime: topFriends[0].flowTime)
-                  ],
+                  children: topFriendsMedals,
                 ))),
       ),
 

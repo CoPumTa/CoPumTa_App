@@ -27,7 +27,7 @@ class UserInfo {
         cumulativeTime = json['cumulativeTime'],
         todaysTime = json['todaysTime'],
         points = json['points'],
-        githubId = json['githubId'] ?? "",
+        githubId = json['githubId'],
         badge = json['badge'] ?? 0;
 
   Map<String, dynamic> toJson() {
